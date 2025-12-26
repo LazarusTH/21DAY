@@ -15,26 +15,43 @@ import gallery8 from "@/assets/gallery-8.jpg";
 import gallery9 from "@/assets/gallery-9.jpg";
 import gallery10 from "@/assets/gallery-10.jpg";
 
-const photos = [
-  gallery1, gallery2, gallery3, gallery4, gallery5,
-  gallery6, gallery7, gallery8, gallery9, gallery10
-];
-
-const videos = [
-  "/videos/video-1.MOV",
-  "/videos/video-2.MOV",
-  "/videos/video-3.MOV",
-  "/videos/video-4.MOV",
-  "/videos/video-5.MOV",
-  "/videos/video-6.MOV",
-  "/videos/video-7.MOV",
-  "/videos/video-8.MOV",
-  "/videos/video-9.MOV",
-];
+interface MediaItem {
+  id: number;
+  type: "image" | "video";
+  src: string;
+  size: "small" | "medium" | "large" | "tall";
+}
 
 const PhotoGallery = () => {
   const [playingId, setPlayingId] = useState<number | null>(null);
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
+
+  const mediaItems: MediaItem[] = [
+    // Row 1
+    { id: 1, type: "image", src: gallery1, size: "medium" },
+    { id: 2, type: "video", src: "/videos/video-1.MOV", size: "tall" },
+    { id: 3, type: "image", src: gallery2, size: "small" },
+    { id: 4, type: "video", src: "/videos/video-2.MOV", size: "tall" },
+    // Row 2
+    { id: 5, type: "video", src: "/videos/video-3.MOV", size: "tall" },
+    { id: 6, type: "image", src: gallery3, size: "medium" },
+    { id: 7, type: "image", src: gallery4, size: "small" },
+    { id: 8, type: "video", src: "/videos/video-4.MOV", size: "tall" },
+    // Row 3
+    { id: 9, type: "image", src: gallery5, size: "small" },
+    { id: 10, type: "video", src: "/videos/video-5.MOV", size: "tall" },
+    { id: 11, type: "image", src: gallery6, size: "medium" },
+    { id: 12, type: "video", src: "/videos/video-6.MOV", size: "tall" },
+    // Row 4
+    { id: 13, type: "video", src: "/videos/video-7.MOV", size: "tall" },
+    { id: 14, type: "image", src: gallery7, size: "small" },
+    { id: 15, type: "image", src: gallery8, size: "medium" },
+    { id: 16, type: "video", src: "/videos/video-8.MOV", size: "tall" },
+    // Row 5
+    { id: 17, type: "image", src: gallery9, size: "medium" },
+    { id: 18, type: "video", src: "/videos/video-9.MOV", size: "tall" },
+    { id: 19, type: "image", src: gallery10, size: "small" },
+  ];
 
   const togglePlay = (id: number) => {
     const video = videoRefs.current[id];
@@ -62,7 +79,7 @@ const PhotoGallery = () => {
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <AnimatedSection className="mb-16 text-center">
+        <AnimatedSection className="mb-12 text-center">
           <motion.span
             className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase"
             initial={{ opacity: 0, y: -10 }}
@@ -80,132 +97,66 @@ const PhotoGallery = () => {
           </p>
         </AnimatedSection>
 
-        {/* Photos Section */}
-        <div className="mb-16">
-          <motion.div 
-            className="flex items-center gap-3 mb-6"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
-            <span className="text-xs font-semibold text-muted-foreground tracking-widest uppercase">Photos</span>
-            <div className="h-px flex-1 bg-gradient-to-l from-border to-transparent" />
-          </motion.div>
-
-          {/* Horizontal Scroll Photos */}
-          <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
-            <div className="flex gap-4 overflow-x-auto px-4 sm:px-6 lg:px-8 pb-4 scrollbar-hide">
-              {photos.map((src, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ delay: index * 0.05 }}
-                  className="group relative flex-shrink-0 overflow-hidden rounded-2xl"
-                  style={{ 
-                    width: index % 3 === 0 ? '280px' : index % 3 === 1 ? '220px' : '250px',
-                  }}
-                >
-                  <div className="aspect-[4/5] overflow-hidden">
-                    <img
-                      src={src}
-                      alt=""
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                  </div>
-                  
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Border Glow */}
-                  <div className="absolute inset-0 rounded-2xl ring-2 ring-inset ring-secondary/0 group-hover:ring-secondary/60 transition-all duration-300" />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Fade Edges */}
-            <div className="absolute left-0 top-0 bottom-4 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-          </div>
-        </div>
-
-        {/* Videos Section */}
-        <div>
-          <motion.div 
-            className="flex items-center gap-3 mb-6"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
-            <span className="text-xs font-semibold text-muted-foreground tracking-widest uppercase">Videos</span>
-            <div className="h-px flex-1 bg-gradient-to-l from-border to-transparent" />
-          </motion.div>
-
-          {/* Video Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-9 gap-3">
-            {videos.map((src, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ delay: index * 0.05 }}
-                className="group relative overflow-hidden rounded-xl cursor-pointer bg-muted/50"
-                onClick={() => togglePlay(index)}
-              >
-                <video
-                  ref={(el) => (videoRefs.current[index] = el)}
-                  src={src}
-                  muted
-                  loop
-                  playsInline
-                  className="w-full aspect-[9/16] object-cover"
+        {/* Masonry Grid */}
+        <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-3 space-y-3">
+          {mediaItems.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: (index % 5) * 0.05 }}
+              className="break-inside-avoid group relative overflow-hidden rounded-xl cursor-pointer"
+              onClick={() => item.type === "video" && togglePlay(item.id)}
+            >
+              {item.type === "image" ? (
+                <img
+                  src={item.src}
+                  alt=""
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
-
-                {/* Play/Pause Overlay */}
-                <div
-                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-                    playingId === index ? "opacity-0 group-hover:opacity-100" : "opacity-100"
-                  }`}
-                >
-                  <div className="absolute inset-0 bg-foreground/30 backdrop-blur-[1px]" />
-                  <motion.div
-                    className="relative z-10 w-10 h-10 rounded-full bg-secondary flex items-center justify-center shadow-lg"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.95 }}
+              ) : (
+                <div className="relative">
+                  <video
+                    ref={(el) => (videoRefs.current[item.id] = el)}
+                    src={item.src}
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-auto object-cover"
+                  />
+                  
+                  {/* Play/Pause Overlay */}
+                  <div
+                    className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                      playingId === item.id ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+                    }`}
                   >
-                    {playingId === index ? (
-                      <HiPause className="w-4 h-4 text-secondary-foreground" />
-                    ) : (
-                      <HiPlay className="w-4 h-4 text-secondary-foreground ml-0.5" />
-                    )}
-                  </motion.div>
+                    <div className="absolute inset-0 bg-foreground/20" />
+                    <motion.div
+                      className="relative z-10 w-12 h-12 rounded-full bg-secondary/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {playingId === item.id ? (
+                        <HiPause className="w-5 h-5 text-secondary-foreground" />
+                      ) : (
+                        <HiPlay className="w-5 h-5 text-secondary-foreground ml-0.5" />
+                      )}
+                    </motion.div>
+                  </div>
                 </div>
+              )}
 
-                {/* Active Border */}
-                <div className={`absolute inset-0 rounded-xl ring-2 ring-inset transition-all duration-300 ${
-                  playingId === index ? "ring-secondary" : "ring-transparent group-hover:ring-secondary/50"
-                }`} />
-              </motion.div>
-            ))}
-          </div>
+              {/* Hover Glow Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute inset-0 ring-2 ring-inset ring-secondary/50 rounded-xl" />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-
-      {/* Hide scrollbar */}
-      <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 };
