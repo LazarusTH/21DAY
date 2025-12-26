@@ -33,8 +33,8 @@ const CallToAction = () => {
           duration: 0.5
         }} viewport={{
           once: true
-        }} className="mb-6 inline-flex items-center rounded-full bg-muted/60 backdrop-blur-sm px-4 py-2 text-sm border border-border/50">
-            <span className="text-foreground/70 font-medium">Transform Lives Today</span>
+        }} className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase">
+            Transform Lives Today
           </motion.div>
 
           <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
