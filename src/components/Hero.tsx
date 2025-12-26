@@ -260,7 +260,7 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right Column - Cards with Connection Lines */}
+          {/* Right Column - Video + Cards */}
           <motion.div initial={{
           opacity: 0,
           y: 20
@@ -270,117 +270,57 @@ const Hero = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.3
-        }} className="relative lg:initial">
-            {/* Top Card - Program Overview */}
-            <motion.div className="relative z-10 w-full rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg" initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            delay: 0.5
-          }}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
-                  <HiOutlineCalendar className="h-5 w-5 text-primary" />
-                </div>
-                <div className="font-semibold text-foreground text-lg">Program Overview</div>
-                <div className="ml-auto">
-                  <div className="h-8 w-8 rounded-lg bg-muted/80 flex items-center justify-center border border-border/50">
-                    <HiOutlineSparkles className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm">
-                <div className="flex items-center gap-2.5 text-muted-foreground">
-                  <div className="h-2 w-2 rounded-full bg-secondary" />
-                  21 Days Training
-                </div>
-                <div className="flex items-center gap-2.5 text-muted-foreground">
-                  <div className="h-2 w-2 rounded-full bg-secondary" />
-                  Career Skills
-                </div>
-                <div className="flex items-center gap-2.5 text-muted-foreground">
-                  <div className="h-2 w-2 rounded-full bg-primary" />
-                  Leadership
-                </div>
-                <div className="flex items-center gap-2.5 text-muted-foreground">
-                  <div className="h-2 w-2 rounded-full bg-primary" />
-                  Community Service
-                </div>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <span className="inline-flex items-center rounded-full bg-secondary/15 px-3 py-1.5 text-xs font-semibold text-secondary border border-secondary/20">Career Ready</span>
-                <span className="inline-flex items-center rounded-full bg-primary/15 px-3 py-1.5 text-xs font-semibold text-primary border border-primary/20">Leadership</span>
-                <span className="inline-flex items-center rounded-full bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground">+3</span>
-              </div>
-            </motion.div>
-
-            {/* Connection Lines Container - Desktop only */}
-            <div className="hidden lg:block relative h-16">
-              {/* Center vertical line */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-0 w-0.5 h-8 animated-line rounded-full" />
+        }} className="relative">
+            {/* Autoplaying Video */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-border/50 mb-6">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-auto object-cover aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]"
+              >
+                <source src="/videos/video-7.MOV" type="video/mp4" />
+              </video>
+              {/* Video overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
               
-              {/* Left branch */}
-              <div className="absolute top-8 left-1/2 -translate-x-1/2">
-                <div className="absolute right-0 w-[110px] h-0.5 animated-line-horizontal rounded-full" />
-                <div className="absolute right-[110px] top-0 w-0.5 h-8 animated-line rounded-full" />
-              </div>
-              
-              {/* Right branch */}
-              <div className="absolute top-8 left-1/2 -translate-x-1/2">
-                <div className="absolute left-0 w-[110px] h-0.5 animated-line-horizontal rounded-full" />
-                <div className="absolute left-[110px] top-0 w-0.5 h-8 animated-line rounded-full" />
-              </div>
-            </div>
-
-            {/* Mobile spacer */}
-            <div className="lg:hidden h-4" />
-
-            {/* Bottom Cards - Outcomes */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <motion.div className="relative z-10 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg hover:shadow-xl transition-shadow" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              delay: 0.8
-            }}>
-                <div className="flex items-center gap-2.5 mb-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-emerald-500/20">
-                    <HiOutlineBadgeCheck className="h-4 w-4 text-emerald-600" />
+              {/* Floating stats on video */}
+              <div className="absolute bottom-4 left-4 right-4 flex gap-3">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="flex-1 rounded-xl bg-card/90 backdrop-blur-md border border-border/50 p-3 shadow-lg"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
+                      <HiOutlineCalendar className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-muted-foreground">Duration</div>
+                      <div className="text-sm font-semibold text-foreground">21 Days</div>
+                    </div>
                   </div>
-                  <div className="font-semibold text-foreground">Outcome 1</div>
-                </div>
-                <div className="text-sm font-medium text-foreground/80 mb-2">Job-Ready Skills</div>
-                <div className="text-xs text-muted-foreground">
-                  Prepared for <span className="inline-flex items-center rounded-md bg-muted px-2 py-0.5 font-semibold text-foreground/70">Employment</span>
-                </div>
-              </motion.div>
-
-              <motion.div className="relative z-10 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg hover:shadow-xl transition-shadow" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              delay: 0.9
-            }}>
-                <div className="flex items-center gap-2.5 mb-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-violet-500/5 border border-violet-500/20">
-                    <HiOutlineUsers className="h-4 w-4 text-violet-600" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9 }}
+                  className="flex-1 rounded-xl bg-card/90 backdrop-blur-md border border-border/50 p-3 shadow-lg"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-secondary/20 to-secondary/5 border border-secondary/20">
+                      <HiOutlineUsers className="h-4 w-4 text-secondary" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-muted-foreground">Per Cohort</div>
+                      <div className="text-sm font-semibold text-foreground">50+ Youth</div>
+                    </div>
                   </div>
-                  <div className="font-semibold text-foreground">Outcome 2</div>
-                </div>
-                <div className="text-sm font-medium text-foreground/80 mb-2">Community Impact</div>
-                <div className="text-xs text-muted-foreground">
-                  Serve with <span className="inline-flex items-center rounded-md bg-secondary/15 px-2 py-0.5 font-semibold text-secondary">Purpose</span>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
 
           </motion.div>
