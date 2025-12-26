@@ -50,11 +50,9 @@ const StickyNav = () => {
             <nav className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-base font-bold text-background font-display shadow-sm">
-                  21
-                </div>
+                <img src="/logo.jpg" alt="21 Day Bootcamp" className="h-9 w-auto rounded-lg shadow-sm" />
                 <span className="font-semibold text-foreground text-sm">
-                  Day Bootcamp
+                  21 Day Bootcamp
                 </span>
               </div>
               
