@@ -35,7 +35,7 @@ const DualImpact = () => {
             <span className="mb-4 inline-block rounded-full bg-muted px-4 py-1.5 text-sm font-semibold text-muted-foreground">
               Dual-Impact Model
             </span>
-            <h2 className="mx-auto max-w-3xl font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
               Transform Yourself,{" "}
               <span className="relative">
                 <span className="relative z-10 text-secondary">Transform Your Community</span>

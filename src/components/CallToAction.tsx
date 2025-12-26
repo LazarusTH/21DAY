@@ -37,12 +37,9 @@ const CallToAction = () => {
             <span className="text-foreground/70 font-medium">Transform Lives Today</span>
           </motion.div>
 
-          <h2 className="mb-6 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
             Ready to Make an{" "}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-secondary to-primary text-white px-3 py-1 rounded-xl">Impact</span>
-            </span>
-            ?
+            <span className="text-secondary">Impact</span>?
           </h2>
           <p className="mb-10 text-lg leading-relaxed text-muted-foreground max-w-2xl mx-auto">
             Join us in empowering the next generation of Ethiopian leaders. 

@@ -46,9 +46,9 @@ const ProgramHighlights = () => {
           <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
             Program Structure
           </span>
-          <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
             A Proven Framework for{" "}
-            <span className="text-gradient">Success</span>
+            <span className="text-secondary">Success</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
             Our holistic curriculum addresses the gaps between academic knowledge 
