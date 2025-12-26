@@ -40,7 +40,7 @@ const ProgramHighlights = () => {
   const duplicatedHighlights = [...highlights, ...highlights];
 
   return (
-    <section className="relative overflow-hidden bg-muted/30 py-24">
+    <section id="program" className="relative overflow-hidden bg-muted/30 py-24">
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="mb-12 text-center">
           <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">

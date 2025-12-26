@@ -4,7 +4,7 @@ import { Play, Volume2, Users, Star } from "lucide-react";
 import { useState } from "react";
 const VideoTestimonials = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  return <section className="relative overflow-hidden bg-foreground py-24 lg:py-32">
+  return <section id="testimonials" className="relative overflow-hidden bg-foreground py-24 lg:py-32">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div className="absolute -left-20 top-20 h-72 w-72 rounded-full border border-background/10" animate={{
