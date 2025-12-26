@@ -19,10 +19,11 @@ interface MediaItem {
   id: number;
   type: "image" | "video";
   src: string;
+  thumbnail?: string;
   size: "small" | "medium" | "large" | "tall";
 }
 
-// Ultra-lightweight Video component - only loads on click
+// Ultra-lightweight Video component - shows thumbnail until clicked
 const LazyVideo = ({ 
   item, 
   isPlaying, 
@@ -36,6 +37,7 @@ const LazyVideo = ({
 }) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
 
   const handleClick = useCallback(() => {
     if (!shouldLoad) {
@@ -46,11 +48,28 @@ const LazyVideo = ({
 
   return (
     <div className="relative cursor-pointer" onClick={handleClick}>
-      {/* Static placeholder - no video loading until click */}
+      {/* Thumbnail image - shows until video is loaded and playing */}
       {!isLoaded && (
-        <div className="aspect-[9/16] w-full rounded-xl overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted-foreground/10 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center">
-            <HiPlay className="w-8 h-8 text-secondary" />
+        <div className="aspect-[9/16] w-full rounded-xl overflow-hidden relative">
+          {/* Skeleton placeholder while thumbnail loads */}
+          {!thumbnailLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-br from-muted via-muted/80 to-muted-foreground/10 animate-pulse" />
+          )}
+          {item.thumbnail && (
+            <img
+              src={item.thumbnail}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              onLoad={() => setThumbnailLoaded(true)}
+              className={`w-full h-full object-cover transition-opacity duration-300 ${thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`}
+            />
+          )}
+          {/* Play button overlay on thumbnail */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-14 h-14 rounded-full bg-secondary/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
+              <HiPlay className="w-6 h-6 text-secondary-foreground ml-0.5" />
+            </div>
           </div>
         </div>
       )}
@@ -68,7 +87,7 @@ const LazyVideo = ({
         />
       )}
       
-      {/* Play/Pause Overlay */}
+      {/* Play/Pause Overlay when video is loaded */}
       {isLoaded && (
         <div
           className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
@@ -121,27 +140,27 @@ const PhotoGallery = () => {
   const mediaItems: MediaItem[] = [
     // Row 1
     { id: 1, type: "image", src: gallery1, size: "medium" },
-    { id: 2, type: "video", src: "/videos/video-1.MOV", size: "tall" },
+    { id: 2, type: "video", src: "/videos/video-1.MOV", thumbnail: "/thumbnails/thumb-1.jpg", size: "tall" },
     { id: 3, type: "image", src: gallery2, size: "small" },
-    { id: 4, type: "video", src: "/videos/video-2.MOV", size: "tall" },
+    { id: 4, type: "video", src: "/videos/video-2.MOV", thumbnail: "/thumbnails/thumb-2.jpg", size: "tall" },
     // Row 2
-    { id: 5, type: "video", src: "/videos/video-3.MOV", size: "tall" },
+    { id: 5, type: "video", src: "/videos/video-3.MOV", thumbnail: "/thumbnails/thumb-3.jpg", size: "tall" },
     { id: 6, type: "image", src: gallery3, size: "medium" },
     { id: 7, type: "image", src: gallery4, size: "small" },
-    { id: 8, type: "video", src: "/videos/video-4.MOV", size: "tall" },
+    { id: 8, type: "video", src: "/videos/video-4.MOV", thumbnail: "/thumbnails/thumb-4.jpg", size: "tall" },
     // Row 3
     { id: 9, type: "image", src: gallery5, size: "small" },
-    { id: 10, type: "video", src: "/videos/video-5.MOV", size: "tall" },
+    { id: 10, type: "video", src: "/videos/video-5.MOV", thumbnail: "/thumbnails/thumb-5.jpg", size: "tall" },
     { id: 11, type: "image", src: gallery6, size: "medium" },
-    { id: 12, type: "video", src: "/videos/video-6.MOV", size: "tall" },
+    { id: 12, type: "video", src: "/videos/video-6.MOV", thumbnail: "/thumbnails/thumb-6.jpg", size: "tall" },
     // Row 4
-    { id: 13, type: "video", src: "/videos/video-7.MOV", size: "tall" },
+    { id: 13, type: "video", src: "/videos/video-7.MOV", thumbnail: "/thumbnails/thumb-7.jpg", size: "tall" },
     { id: 14, type: "image", src: gallery7, size: "small" },
     { id: 15, type: "image", src: gallery8, size: "medium" },
-    { id: 16, type: "video", src: "/videos/video-8.MOV", size: "tall" },
+    { id: 16, type: "video", src: "/videos/video-8.MOV", thumbnail: "/thumbnails/thumb-8.jpg", size: "tall" },
     // Row 5
     { id: 17, type: "image", src: gallery9, size: "medium" },
-    { id: 18, type: "video", src: "/videos/video-9.MOV", size: "tall" },
+    { id: 18, type: "video", src: "/videos/video-9.MOV", thumbnail: "/thumbnails/thumb-9.jpg", size: "tall" },
     { id: 19, type: "image", src: gallery10, size: "small" },
   ];
 
