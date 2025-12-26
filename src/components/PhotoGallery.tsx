@@ -140,27 +140,27 @@ const PhotoGallery = () => {
   const mediaItems: MediaItem[] = [
     // Row 1
     { id: 1, type: "image", src: gallery1, size: "medium" },
-    { id: 2, type: "video", src: "/videos/video-1.MOV", thumbnail: "/thumbnails/thumb-1.jpg", size: "tall" },
+    { id: 2, type: "video", src: "/videos/video-1.MOV", thumbnail: gallery1, size: "tall" },
     { id: 3, type: "image", src: gallery2, size: "small" },
-    { id: 4, type: "video", src: "/videos/video-2.MOV", thumbnail: "/thumbnails/thumb-2.jpg", size: "tall" },
+    { id: 4, type: "video", src: "/videos/video-2.MOV", thumbnail: gallery2, size: "tall" },
     // Row 2
-    { id: 5, type: "video", src: "/videos/video-3.MOV", thumbnail: "/thumbnails/thumb-3.jpg", size: "tall" },
+    { id: 5, type: "video", src: "/videos/video-3.MOV", thumbnail: gallery3, size: "tall" },
     { id: 6, type: "image", src: gallery3, size: "medium" },
     { id: 7, type: "image", src: gallery4, size: "small" },
-    { id: 8, type: "video", src: "/videos/video-4.MOV", thumbnail: "/thumbnails/thumb-4.jpg", size: "tall" },
+    { id: 8, type: "video", src: "/videos/video-4.MOV", thumbnail: gallery4, size: "tall" },
     // Row 3
     { id: 9, type: "image", src: gallery5, size: "small" },
-    { id: 10, type: "video", src: "/videos/video-5.MOV", thumbnail: "/thumbnails/thumb-5.jpg", size: "tall" },
+    { id: 10, type: "video", src: "/videos/video-5.MOV", thumbnail: gallery5, size: "tall" },
     { id: 11, type: "image", src: gallery6, size: "medium" },
-    { id: 12, type: "video", src: "/videos/video-6.MOV", thumbnail: "/thumbnails/thumb-6.jpg", size: "tall" },
+    { id: 12, type: "video", src: "/videos/video-6.MOV", thumbnail: gallery6, size: "tall" },
     // Row 4
-    { id: 13, type: "video", src: "/videos/video-7.MOV", thumbnail: "/thumbnails/thumb-7.jpg", size: "tall" },
+    { id: 13, type: "video", src: "/videos/video-7.MOV", thumbnail: gallery7, size: "tall" },
     { id: 14, type: "image", src: gallery7, size: "small" },
     { id: 15, type: "image", src: gallery8, size: "medium" },
-    { id: 16, type: "video", src: "/videos/video-8.MOV", thumbnail: "/thumbnails/thumb-8.jpg", size: "tall" },
+    { id: 16, type: "video", src: "/videos/video-8.MOV", thumbnail: gallery8, size: "tall" },
     // Row 5
     { id: 17, type: "image", src: gallery9, size: "medium" },
-    { id: 18, type: "video", src: "/videos/video-9.MOV", thumbnail: "/thumbnails/thumb-9.jpg", size: "tall" },
+    { id: 18, type: "video", src: "/videos/video-9.MOV", thumbnail: gallery9, size: "tall" },
     { id: 19, type: "image", src: gallery10, size: "small" },
   ];
 
