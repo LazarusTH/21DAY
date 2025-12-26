@@ -23,7 +23,7 @@ const DualImpact = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-background py-16 lg:py-20">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute left-1/4 top-20 h-72 w-72 rounded-full bg-primary/5 blur-[100px]" />
