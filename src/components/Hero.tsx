@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, Users, Calendar, Trophy, Sparkles, GraduationCap } from "lucide-react";
-import heroImage from "@/assets/hero-bootcamp.jpg";
+import { ArrowRight, Star, Users, Calendar, Trophy, Sparkles, GraduationCap, Play } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -10,60 +9,60 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--muted)/0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--muted)/0.3)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
       
       {/* Decorative blurs */}
-      <div className="absolute right-0 top-0 h-[600px] w-[600px] rounded-full bg-secondary/5 blur-3xl" />
-      <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" />
+      <div className="absolute right-0 top-0 h-[500px] w-[500px] rounded-full bg-secondary/5 blur-3xl" />
+      <div className="absolute -left-40 bottom-0 h-[300px] w-[300px] rounded-full bg-primary/5 blur-3xl" />
 
-      <div className="container relative mx-auto px-6 py-8">
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Navigation */}
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-20 flex items-center justify-between"
+          className="mb-12 lg:mb-16 flex items-center justify-between"
         >
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground text-xl font-bold text-background font-display">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground text-lg font-bold text-background font-display">
               21
             </div>
-            <span className="font-semibold text-foreground text-lg">
+            <span className="font-semibold text-foreground">
               Day Bootcamp
             </span>
           </div>
           
           {/* Nav Links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+          <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
             <a href="#program" className="hover:text-foreground transition-colors">Program</a>
             <a href="#testimonials" className="hover:text-foreground transition-colors">Testimonials</a>
             <a href="#gallery" className="hover:text-foreground transition-colors">Gallery</a>
             <a href="#sponsor" className="hover:text-foreground transition-colors">Sponsor</a>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" className="hidden sm:inline-flex">
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
               Contact
             </Button>
-            <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6">
+            <Button size="sm" className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5">
               Sponsor Now
             </Button>
           </div>
         </motion.nav>
 
         {/* Main Content */}
-        <div className="grid items-center gap-16 lg:grid-cols-2">
+        <div className="grid items-start gap-12 lg:gap-8 lg:grid-cols-[1fr,480px] xl:grid-cols-[1fr,540px]">
           {/* Left Column - Text */}
-          <div className="max-w-2xl">
+          <div className="max-w-xl pt-4 lg:pt-8">
             {/* Trust Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full bg-muted px-4 py-2 text-sm"
+              className="mb-6 inline-flex items-center gap-2 rounded-full bg-muted/80 px-3 py-1.5 text-sm"
             >
               <div className="flex items-center gap-1 bg-emerald-500 text-white px-2 py-0.5 rounded text-xs font-semibold">
                 <Star className="h-3 w-3 fill-current" />
                 Success
               </div>
-              <span className="text-muted-foreground font-medium">2 Cohorts Completed</span>
+              <span className="text-muted-foreground font-medium text-xs sm:text-sm">2 Cohorts Completed</span>
             </motion.div>
 
             {/* Main Headline */}
@@ -71,22 +70,22 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-foreground"
+              className="mb-5 font-display text-4xl sm:text-5xl xl:text-6xl font-bold leading-[1.15] tracking-tight text-foreground"
             >
-              <span className="inline-block bg-secondary text-secondary-foreground px-3 py-1 rounded-lg">Transform</span>{" "}
-              Youth Into
-              <br />
-              Leaders{" "}
-              <span className="inline-flex items-center justify-center mx-2 h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-primary/10 text-primary">
-                <GraduationCap className="h-6 w-6 sm:h-7 sm:w-7" />
+              <span className="inline-block bg-secondary text-secondary-foreground px-2.5 py-0.5 rounded-lg">Transform</span>{" "}
+              <span className="whitespace-nowrap">Youth Into</span>{" "}
+              <span className="inline-flex items-baseline">
+                Leaders
+                <span className="inline-flex items-center justify-center mx-1.5 h-9 w-9 sm:h-11 sm:w-11 rounded-full bg-primary/10 text-primary align-middle">
+                  <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6" />
+                </span>
               </span>{" "}
-              Build
-              <br />
-              Futures{" "}
-              <span className="inline-flex items-center justify-center mx-2 h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-secondary/20 text-secondary">
-                <Sparkles className="h-6 w-6 sm:h-7 sm:w-7" />
-              </span>{" "}
-              Together
+              <span className="whitespace-nowrap">
+                Build Futures
+                <span className="inline-flex items-center justify-center mx-1.5 h-9 w-9 sm:h-11 sm:w-11 rounded-full bg-secondary/20 text-secondary align-middle">
+                  <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
+                </span>
+              </span>
             </motion.h1>
 
             {/* Subheadline */}
@@ -94,7 +93,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-10 text-lg text-muted-foreground max-w-lg leading-relaxed"
+              className="mb-8 text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed"
             >
               21-day intensive bootcamp empowering Ethiopian youth with career skills, 
               leadership training, and community service — for just 5,000 Birr per participant.
@@ -105,183 +104,146 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4"
+              className="flex flex-wrap items-center gap-3"
             >
-              <Button size="xl" className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-8 h-14 text-base font-semibold shadow-lg">
+              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6 h-12 text-sm font-semibold shadow-lg">
                 <span className="flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-background/20">
-                    <ArrowRight className="h-4 w-4" />
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-background/20">
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                   Get Started
                 </span>
               </Button>
-              <Button variant="ghost" size="xl" className="text-muted-foreground hover:text-foreground h-14 text-base font-medium">
+              <Button variant="ghost" size="lg" className="text-muted-foreground hover:text-foreground h-12 text-sm font-medium">
                 See How It Works
-                <ArrowRight className="h-4 w-4 ml-2" />
+                <ArrowRight className="h-4 w-4 ml-1.5" />
               </Button>
             </motion.div>
           </div>
 
-          {/* Right Column - Floating Cards */}
+          {/* Right Column - Cards & Video */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative hidden lg:block h-[600px]"
+            className="hidden lg:flex flex-col gap-4"
           >
-            {/* Connection lines */}
-            <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
-              <motion.path
-                d="M200,80 L200,180"
-                stroke="hsl(var(--muted))"
-                strokeWidth="2"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1, delay: 0.8 }}
-              />
-              <motion.path
-                d="M200,280 L200,340 L120,400"
-                stroke="hsl(var(--muted))"
-                strokeWidth="2"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-              />
-              <motion.path
-                d="M200,280 L200,340 L280,400"
-                stroke="hsl(var(--muted))"
-                strokeWidth="2"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-              />
-              {/* Connection dots */}
-              <motion.circle cx="200" cy="180" r="4" fill="hsl(var(--secondary))" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.2 }} />
-              <motion.circle cx="200" cy="340" r="4" fill="hsl(var(--primary))" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.4 }} />
-            </svg>
-
-            {/* Avatars cluster */}
-            <motion.div 
-              className="absolute right-0 top-0 flex -space-x-3"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              {[heroImage, heroImage, heroImage].map((_, i) => (
-                <div key={i} className="h-12 w-12 rounded-full border-3 border-background bg-muted overflow-hidden shadow-md">
-                  <img src={heroImage} alt="" className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Card 1 - Program Info */}
+            {/* Top Card - Program Info */}
             <motion.div
-              className="absolute left-12 top-12 w-72 rounded-2xl bg-card border border-border p-5 shadow-elevated"
+              className="w-full rounded-2xl bg-card border border-border p-5 shadow-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              whileHover={{ y: -2, transition: { duration: 0.2 } }}
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
                   <Calendar className="h-5 w-5 text-primary" />
                 </div>
-                <div className="font-semibold text-foreground">Program</div>
-                <div className="ml-auto flex gap-1">
-                  <div className="h-6 w-6 rounded-lg bg-muted flex items-center justify-center">
-                    <Sparkles className="h-3 w-3 text-muted-foreground" />
+                <div className="font-semibold text-foreground">Program Overview</div>
+                <div className="ml-auto">
+                  <div className="h-7 w-7 rounded-lg bg-muted flex items-center justify-center">
+                    <Sparkles className="h-3.5 w-3.5 text-muted-foreground" />
                   </div>
                 </div>
               </div>
-              <div className="space-y-2 text-sm">
+              <div className="grid grid-cols-2 gap-3 text-sm">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <div className="h-1.5 w-1.5 rounded-full bg-secondary" />
-                  21 Days Intensive Training
+                  21 Days Training
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <div className="h-1.5 w-1.5 rounded-full bg-secondary" />
-                  Career & Leadership Skills
+                  Career Skills
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Leadership
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  Community Service
                 </div>
               </div>
               <div className="mt-4 flex gap-2">
-                <span className="inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary">Career</span>
+                <span className="inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary">Career Ready</span>
                 <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">Leadership</span>
+                <span className="inline-flex items-center rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">+3</span>
               </div>
             </motion.div>
 
-            {/* Card 2 - Impact */}
+            {/* Middle - Video */}
             <motion.div
-              className="absolute left-24 top-56 w-72 rounded-2xl bg-card border border-border p-5 shadow-elevated"
+              className="w-full rounded-2xl bg-gradient-to-br from-muted/50 to-muted overflow-hidden border border-border shadow-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10">
-                  <Users className="h-5 w-5 text-secondary" />
+              <div className="relative aspect-video bg-foreground/5">
+                {/* Video placeholder - replace src with actual video */}
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster=""
+                >
+                  {/* Add your video source here */}
+                  <source src="" type="video/mp4" />
+                </video>
+                {/* Play overlay for when no video */}
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-background/90 shadow-lg cursor-pointer hover:scale-105 transition-transform">
+                      <Play className="h-6 w-6 text-foreground ml-1" fill="currentColor" />
+                    </div>
+                    <span className="text-sm font-medium text-foreground/80">Watch Our Story</span>
+                  </div>
                 </div>
-                <div className="font-semibold text-foreground">Dual Impact</div>
-              </div>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  Individual Skill Development
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  Community Service Projects
-                </div>
-              </div>
-              <div className="mt-4 flex items-center gap-2">
-                <span className="text-xs font-medium text-muted-foreground">Priority:</span>
-                <span className="inline-flex items-center rounded-full bg-orange-500/10 px-2 py-0.5 text-xs font-medium text-orange-600">High</span>
-                <span className="inline-flex items-center rounded-full bg-red-500/10 px-2 py-0.5 text-xs font-medium text-red-600">Urgent</span>
               </div>
             </motion.div>
 
-            {/* Card 3 - Outcomes */}
-            <motion.div
-              className="absolute left-0 bottom-16 w-56 rounded-2xl bg-card border border-border p-4 shadow-elevated"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10">
-                  <Trophy className="h-4 w-4 text-emerald-600" />
+            {/* Bottom Cards - Outcomes */}
+            <div className="grid grid-cols-2 gap-4">
+              <motion.div
+                className="rounded-2xl bg-card border border-border p-4 shadow-sm"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 }}
+                whileHover={{ y: -2, transition: { duration: 0.2 } }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10">
+                    <Trophy className="h-4 w-4 text-emerald-600" />
+                  </div>
+                  <div className="font-semibold text-sm text-foreground">Outcome 1</div>
                 </div>
-                <div className="font-semibold text-sm text-foreground">Outcome 1</div>
-              </div>
-              <div className="text-sm text-muted-foreground">Job-Ready Skills</div>
-              <div className="mt-2 text-xs text-muted-foreground">
-                Prepared for <span className="inline-flex items-center rounded bg-muted px-1.5 py-0.5 font-medium">Employment</span>
-              </div>
-            </motion.div>
+                <div className="text-sm text-muted-foreground mb-2">Job-Ready Skills</div>
+                <div className="text-xs text-muted-foreground">
+                  Prepared for <span className="inline-flex items-center rounded bg-muted px-1.5 py-0.5 font-medium">Employment</span>
+                </div>
+              </motion.div>
 
-            {/* Card 4 - Community */}
-            <motion.div
-              className="absolute right-0 bottom-16 w-56 rounded-2xl bg-card border border-border p-4 shadow-elevated"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10">
-                  <Users className="h-4 w-4 text-violet-600" />
+              <motion.div
+                className="rounded-2xl bg-card border border-border p-4 shadow-sm"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+                whileHover={{ y: -2, transition: { duration: 0.2 } }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10">
+                    <Users className="h-4 w-4 text-violet-600" />
+                  </div>
+                  <div className="font-semibold text-sm text-foreground">Outcome 2</div>
                 </div>
-                <div className="font-semibold text-sm text-foreground">Outcome 2</div>
-              </div>
-              <div className="text-sm text-muted-foreground">Community Impact</div>
-              <div className="mt-2 text-xs text-muted-foreground">
-                Serve with <span className="inline-flex items-center rounded bg-secondary/10 px-1.5 py-0.5 font-medium text-secondary">Purpose</span>
-              </div>
-            </motion.div>
+                <div className="text-sm text-muted-foreground mb-2">Community Impact</div>
+                <div className="text-xs text-muted-foreground">
+                  Serve with <span className="inline-flex items-center rounded bg-secondary/10 px-1.5 py-0.5 font-medium text-secondary">Purpose</span>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
