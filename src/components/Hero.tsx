@@ -1,8 +1,27 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, Users, Calendar, Trophy, Sparkles, GraduationCap } from "lucide-react";
+import { useState } from "react";
+import { HiArrowRight, HiOutlineCalendar, HiOutlineUsers, HiOutlineAcademicCap, HiOutlineSparkles, HiOutlineBadgeCheck, HiCheck, HiMenu, HiX } from "react-icons/hi";
 
 const Hero = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  const navLinks = [
+    { href: "program", label: "Program" },
+    { href: "testimonials", label: "Testimonials" },
+    { href: "gallery", label: "Gallery" },
+    { href: "sponsor", label: "Sponsor" },
+  ];
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-background">
       {/* Animated gradient line styles */}
@@ -73,23 +92,98 @@ const Hero = () => {
             </span>
           </div>
           
-          {/* Nav Links */}
+          {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            <a href="#program" className="hover:text-foreground transition-colors">Program</a>
-            <a href="#testimonials" className="hover:text-foreground transition-colors">Testimonials</a>
-            <a href="#gallery" className="hover:text-foreground transition-colors">Gallery</a>
-            <a href="#sponsor" className="hover:text-foreground transition-colors">Sponsor</a>
+            {navLinks.map((link) => (
+              <a 
+                key={link.href}
+                href={`#${link.href}`} 
+                onClick={(e) => scrollToSection(e, link.href)}
+                className="hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" className="hidden sm:inline-flex text-muted-foreground">
               Contact
             </Button>
-            <Button size="sm" className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 shadow-md">
+            <Button size="sm" className="hidden sm:inline-flex bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 shadow-md">
               Sponsor Now
             </Button>
+            
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden flex items-center justify-center h-10 w-10 rounded-xl bg-muted/60 border border-border/50 text-foreground"
+            >
+              {mobileMenuOpen ? <HiX className="h-5 w-5" /> : <HiMenu className="h-5 w-5" />}
+            </button>
           </div>
         </motion.nav>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 lg:hidden"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              
+              {/* Slide-in Menu */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed top-0 right-0 h-full w-72 bg-background border-l border-border shadow-elevated z-50 lg:hidden"
+              >
+                <div className="flex items-center justify-between p-6 border-b border-border">
+                  <span className="font-semibold text-foreground">Menu</span>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center h-9 w-9 rounded-lg bg-muted/60 text-foreground"
+                  >
+                    <HiX className="h-5 w-5" />
+                  </button>
+                </div>
+                
+                <div className="p-6 space-y-2">
+                  {navLinks.map((link, index) => (
+                    <motion.a
+                      key={link.href}
+                      href={`#${link.href}`}
+                      onClick={(e) => scrollToSection(e, link.href)}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="block px-4 py-3 rounded-xl text-foreground font-medium hover:bg-muted/60 transition-colors"
+                    >
+                      {link.label}
+                    </motion.a>
+                  ))}
+                  
+                  <div className="pt-4 space-y-3">
+                    <Button variant="outline" className="w-full rounded-xl">
+                      Contact
+                    </Button>
+                    <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl">
+                      Sponsor Now
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
         {/* Main Content */}
         <div className="grid items-center gap-12 lg:gap-10 lg:grid-cols-[1fr,500px] xl:grid-cols-[1fr,560px]">
@@ -103,7 +197,7 @@ const Hero = () => {
               className="mb-7 inline-flex items-center gap-2.5 rounded-full bg-muted/60 backdrop-blur-sm px-4 py-2 text-sm border border-border/50"
             >
               <div className="flex items-center gap-1.5 bg-emerald-500 text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
-                <Star className="h-3 w-3 fill-current" />
+                <HiCheck className="h-3 w-3" />
                 Success
               </div>
               <span className="text-foreground/70 font-medium">2 Cohorts Completed</span>
@@ -120,12 +214,12 @@ const Hero = () => {
               <br />
               <span className="mt-2 inline-block">Youth Into Leaders</span>
               <span className="inline-flex items-center justify-center ml-3 h-11 w-11 rounded-full bg-gradient-to-br from-primary/15 to-primary/5 text-primary border border-primary/20">
-                <GraduationCap className="h-6 w-6" />
+                <HiOutlineAcademicCap className="h-6 w-6" />
               </span>
               <br />
               <span className="inline-block mt-1">Build Futures</span>
               <span className="inline-flex items-center justify-center ml-3 h-11 w-11 rounded-full bg-gradient-to-br from-secondary/15 to-secondary/5 text-secondary border border-secondary/20">
-                <Sparkles className="h-6 w-6" />
+                <HiOutlineSparkles className="h-6 w-6" />
               </span>
             </motion.h1>
 
@@ -150,14 +244,14 @@ const Hero = () => {
               <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <span className="flex items-center gap-2">
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-background/20">
-                    <ArrowRight className="h-3 w-3" />
+                    <HiArrowRight className="h-3 w-3" />
                   </span>
                   Get Started
                 </span>
               </Button>
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground font-medium group">
                 Sponsor
-                <ArrowRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
+                <HiArrowRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
           </div>
@@ -178,12 +272,12 @@ const Hero = () => {
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
-                  <Calendar className="h-5 w-5 text-primary" />
+                  <HiOutlineCalendar className="h-5 w-5 text-primary" />
                 </div>
                 <div className="font-semibold text-foreground text-lg">Program Overview</div>
                 <div className="ml-auto">
                   <div className="h-8 w-8 rounded-lg bg-muted/80 flex items-center justify-center border border-border/50">
-                    <Sparkles className="h-4 w-4 text-muted-foreground" />
+                    <HiOutlineSparkles className="h-4 w-4 text-muted-foreground" />
                   </div>
                 </div>
               </div>
@@ -243,7 +337,7 @@ const Hero = () => {
               >
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-emerald-500/20">
-                    <Trophy className="h-4 w-4 text-emerald-600" />
+                    <HiOutlineBadgeCheck className="h-4 w-4 text-emerald-600" />
                   </div>
                   <div className="font-semibold text-foreground">Outcome 1</div>
                 </div>
@@ -261,7 +355,7 @@ const Hero = () => {
               >
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-violet-500/5 border border-violet-500/20">
-                    <Users className="h-4 w-4 text-violet-600" />
+                    <HiOutlineUsers className="h-4 w-4 text-violet-600" />
                   </div>
                   <div className="font-semibold text-foreground">Outcome 2</div>
                 </div>
