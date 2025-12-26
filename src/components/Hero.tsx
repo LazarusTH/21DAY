@@ -190,9 +190,8 @@ const Hero = () => {
             duration: 0.6,
             delay: 0.1
           }} className="mb-6 font-display text-[2.75rem] sm:text-5xl xl:text-[3.5rem] font-bold leading-[1.1] tracking-tight text-foreground">
-              <span className="inline-block">21 Day</span>
-              <br />
-              <span className="inline-block bg-gradient-to-r from-secondary to-primary text-white px-3 py-1 rounded-xl shadow-lg transform -rotate-1">Bootcamp</span>
+              <span className="inline">21 Day </span>
+              <span className="inline bg-gradient-to-r from-secondary to-primary text-white px-3 py-1 rounded-xl shadow-lg">Bootcamp</span>
             </motion.h1>
 
             {/* Autoplaying Video - Small rectangle */}
@@ -200,7 +199,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 relative rounded-xl overflow-hidden shadow-lg border border-border/50 w-48"
+              className="mb-6 relative rounded-xl overflow-hidden shadow-lg border border-border/50 w-64"
             >
               <video
                 autoPlay
