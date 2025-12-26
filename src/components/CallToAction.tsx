@@ -33,8 +33,7 @@ const CallToAction = () => {
           duration: 0.5
         }} viewport={{
           once: true
-        }} className="mb-6 inline-flex items-center gap-2 rounded-full bg-muted/60 backdrop-blur-sm px-4 py-2 text-sm border border-border/50">
-            <HiOutlineSparkles className="h-4 w-4 text-secondary" />
+        }} className="mb-6 inline-flex items-center rounded-full bg-muted/60 backdrop-blur-sm px-4 py-2 text-sm border border-border/50">
             <span className="text-foreground/70 font-medium">Transform Lives Today</span>
           </motion.div>
 
