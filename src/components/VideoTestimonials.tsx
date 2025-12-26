@@ -1,122 +1,184 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
-import { Play, Quote } from "lucide-react";
+import { Play, Volume2, Users, Star } from "lucide-react";
 import { useState } from "react";
 
 const VideoTestimonials = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const testimonials = [
-    {
-      name: "Meron Tadesse",
-      role: "Cohort 1 Graduate",
-      quote: "Before the bootcamp, I had the skills but lacked the confidence. Now I walk into interviews knowing my worth.",
-    },
-    {
-      name: "Yohannes Bekele",
-      role: "Cohort 1 Graduate", 
-      quote: "The volunteer component taught me that leadership is about service. That perspective changed everything.",
-    },
-    {
-      name: "Sara Alemayehu",
-      role: "Cohort 2 Participant",
-      quote: "21 days to transform my career mindset. The community we built here is invaluable.",
-    },
-  ];
-
   return (
-    <section className="relative overflow-hidden bg-card py-24">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-50">
-        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-secondary/5 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+    <section className="relative overflow-hidden bg-foreground py-24 lg:py-32">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          className="absolute -left-20 top-20 h-72 w-72 rounded-full border border-background/10"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div 
+          className="absolute -right-32 bottom-20 h-96 w-96 rounded-full border border-background/5"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+        />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-secondary/10 blur-[150px]" />
       </div>
 
-      <div className="container relative mx-auto px-6">
-        <AnimatedSection className="mb-16 text-center">
-          <span className="mb-4 inline-block rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary">
-            Hear From Our Graduates
-          </span>
-          <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <AnimatedSection className="mb-14 text-center">
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary"
+          >
+            <Volume2 className="h-7 w-7 text-secondary-foreground" />
+          </motion.div>
+          <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl">
             Real Stories,{" "}
-            <span className="text-gradient">Real Transformation</span>
+            <span className="text-secondary">Real Transformation</span>
           </h2>
+          <p className="mx-auto mt-4 max-w-lg text-background/60">
+            Hear directly from our graduates about their journey
+          </p>
         </AnimatedSection>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Video Section */}
           <AnimatedSection direction="scale">
             <div className="relative">
-              {/* Video placeholder with play button */}
+              {/* Floating elements around video */}
               <motion.div
-                className="group relative cursor-pointer overflow-hidden rounded-2xl bg-gradient-hero shadow-elevated"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                className="absolute -left-4 top-1/4 z-20 hidden lg:block"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+              >
+                <div className="rounded-2xl bg-card p-4 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary">
+                      <Users className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-foreground">100+</div>
+                      <div className="text-xs text-muted-foreground">Graduates</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="absolute -right-4 top-1/3 z-20 hidden lg:block"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
+              >
+                <div className="rounded-2xl bg-card p-4 shadow-xl">
+                  <div className="flex items-center gap-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
+                    ))}
+                  </div>
+                  <div className="mt-1 text-xs text-muted-foreground">5.0 Rating</div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="absolute -bottom-6 left-1/4 z-20 hidden lg:block"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+                animate={{ y: [0, -8, 0] }}
+              >
+                <div className="rounded-full bg-secondary px-4 py-2 shadow-xl">
+                  <span className="text-sm font-semibold text-secondary-foreground">🎯 95% Success Rate</span>
+                </div>
+              </motion.div>
+
+              {/* Main video container */}
+              <motion.div
+                className="group relative cursor-pointer overflow-hidden rounded-3xl border border-background/10 shadow-2xl"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.4 }}
                 onClick={() => setIsPlaying(!isPlaying)}
               >
                 {!isPlaying ? (
-                  <>
-                    <div className="flex aspect-video items-center justify-center">
-                      {/* Decorative elements */}
-                      <div className="absolute inset-0">
-                        <div className="absolute left-1/4 top-1/4 h-32 w-32 rounded-full bg-secondary/20 blur-2xl" />
-                        <div className="absolute bottom-1/4 right-1/4 h-24 w-24 rounded-full bg-primary-foreground/10 blur-xl" />
-                      </div>
-                      
-                      {/* Play button */}
+                  <div className="relative aspect-video bg-gradient-to-br from-primary via-primary/90 to-secondary/80">
+                    {/* Decorative patterns */}
+                    <div className="absolute inset-0 opacity-30">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.1)_0%,transparent_50%)]" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(255,255,255,0.08)_0%,transparent_40%)]" />
+                    </div>
+                    
+                    {/* Animated circles */}
+                    <motion.div
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-40 w-40 rounded-full border border-white/20"
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    />
+                    <motion.div
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-40 w-40 rounded-full border border-white/20"
+                      animate={{ scale: [1, 1.8, 1], opacity: [0.3, 0, 0.3] }}
+                      transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                    />
+                    
+                    {/* Play button */}
+                    <div className="absolute inset-0 flex items-center justify-center">
                       <motion.div
-                        className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-secondary shadow-glow transition-all duration-300 group-hover:scale-110"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                        className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-2xl transition-all duration-300 group-hover:scale-110"
+                        whileHover={{ scale: 1.1 }}
                       >
-                        <Play className="ml-1 h-10 w-10 text-secondary-foreground" fill="currentColor" />
+                        <Play className="ml-1.5 h-10 w-10 text-primary" fill="currentColor" />
                       </motion.div>
+                    </div>
 
-                      {/* Text overlay */}
-                      <div className="absolute bottom-6 left-6 text-left text-primary-foreground">
-                        <div className="mb-1 text-sm opacity-80">Watch Video</div>
-                        <div className="font-display text-xl font-semibold">
-                          Trainee Testimonials
+                    {/* Bottom gradient & text */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/60 to-transparent p-8">
+                      <div className="flex items-end justify-between">
+                        <div className="text-white">
+                          <div className="mb-1 text-sm opacity-80 flex items-center gap-2">
+                            <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+                            Watch Video
+                          </div>
+                          <div className="font-display text-2xl font-bold">
+                            Trainee Testimonials
+                          </div>
+                        </div>
+                        <div className="text-right text-white/80">
+                          <div className="text-sm">Duration</div>
+                          <div className="font-semibold">5:30</div>
                         </div>
                       </div>
                     </div>
-                  </>
+                  </div>
                 ) : (
-                  <div className="flex aspect-video items-center justify-center bg-primary/90 text-primary-foreground">
+                  <div className="flex aspect-video items-center justify-center bg-foreground text-background">
                     <div className="text-center">
-                      <p className="mb-2 text-lg">Video Player Placeholder</p>
-                      <p className="text-sm opacity-70">Your testimonial video will play here</p>
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary"
+                      >
+                        <Play className="ml-1 h-8 w-8 text-secondary-foreground" fill="currentColor" />
+                      </motion.div>
+                      <p className="mb-2 text-xl font-semibold">Video Player</p>
+                      <p className="text-sm opacity-60">Your testimonial video will play here</p>
                       <button 
-                        className="mt-4 rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground"
+                        className="mt-6 rounded-full bg-secondary px-6 py-2.5 text-sm font-semibold text-secondary-foreground transition-transform hover:scale-105"
                         onClick={(e) => {
                           e.stopPropagation();
                           setIsPlaying(false);
                         }}
                       >
-                        Close
+                        Close Video
                       </button>
                     </div>
                   </div>
                 )}
-              </motion.div>
-
-              {/* Video badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                viewport={{ once: true }}
-                className="absolute -bottom-4 -right-4 rounded-xl bg-card p-4 shadow-elevated"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/10">
-                    <span className="text-lg">🎬</span>
-                  </div>
-                  <div className="text-sm">
-                    <div className="font-semibold text-foreground">50+ Graduates</div>
-                    <div className="text-xs text-muted-foreground">Share their journey</div>
-                  </div>
-                </div>
               </motion.div>
             </div>
           </AnimatedSection>
