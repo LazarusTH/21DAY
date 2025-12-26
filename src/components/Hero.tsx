@@ -310,33 +310,6 @@ const Hero = () => {
               </motion.div>
             </div>
 
-            {/* Video Section */}
-            <motion.div
-              className="mt-4 w-full rounded-2xl overflow-hidden border border-border/80 shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-            >
-              <div className="relative aspect-[16/9] bg-gradient-to-br from-foreground/5 to-foreground/10">
-                <video
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                >
-                  <source src="" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-background shadow-xl cursor-pointer hover:scale-110 transition-transform border border-border/50">
-                      <Play className="h-5 w-5 text-foreground ml-0.5" fill="currentColor" />
-                    </div>
-                    <span className="text-sm font-medium text-foreground/70">Watch Our Story</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>
