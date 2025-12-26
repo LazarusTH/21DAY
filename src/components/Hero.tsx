@@ -194,12 +194,12 @@ const Hero = () => {
               <span className="inline bg-gradient-to-r from-secondary to-primary text-white px-3 py-1 rounded-xl shadow-lg">Bootcamp</span>
             </motion.h1>
 
-            {/* Autoplaying Video - Small rectangle */}
+            {/* Autoplaying Video */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 relative rounded-xl overflow-hidden shadow-lg border border-border/50 w-64"
+              className="mb-8 relative rounded-2xl overflow-hidden shadow-lg border border-border/50 w-80 sm:w-96"
             >
               <video
                 autoPlay
@@ -211,20 +211,6 @@ const Hero = () => {
                 <source src="/videos/video-7.MOV" type="video/mp4" />
               </video>
             </motion.div>
-
-            {/* Description */}
-            <motion.p initial={{
-            opacity: 0,
-            y: 30
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.3
-          }} className="mb-8 text-base sm:text-[1.1rem] text-muted-foreground max-w-md leading-relaxed">
-              Empowering Ethiopian youth with career skills, leadership training, and community service. <span className="font-semibold text-foreground">5,000 Birr</span> per participant.
-            </motion.p>
 
             {/* CTAs */}
             <motion.div initial={{
