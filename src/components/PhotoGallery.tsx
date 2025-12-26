@@ -96,7 +96,7 @@ const PhotoGallery = () => {
             <span className="text-secondary">Transformation</span>
           </h2>
           <p className="max-w-md mx-auto text-muted-foreground">
-            Capturing the journey of growth, learning, and community impact through our programs.
+            Captured during training sessions, events, and community activities.
           </p>
         </AnimatedSection>
 
@@ -132,22 +132,6 @@ const PhotoGallery = () => {
             }}>
                   <div className={`relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 ${isCenter ? "w-[320px] h-[380px] md:w-[400px] md:h-[450px]" : "w-[240px] h-[280px] md:w-[300px] md:h-[340px]"}`}>
                     <img src={item.src} alt={item.title} className="w-full h-full object-cover" />
-                    {isCenter && <motion.div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/80 to-transparent p-6" initial={{
-                  opacity: 0,
-                  y: 20
-                }} animate={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  delay: 0.3
-                }}>
-                        <span className="text-xs uppercase tracking-wider text-secondary font-semibold">
-                          {item.category}
-                        </span>
-                        <h3 className="font-display text-xl font-semibold text-background mt-1">
-                          {item.title}
-                        </h3>
-                      </motion.div>}
                   </div>
                 </motion.div>;
           })}
