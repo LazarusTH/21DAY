@@ -199,7 +199,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8 relative rounded-2xl overflow-hidden shadow-lg border border-border/50 w-80 sm:w-96"
+              className="mb-5 relative rounded-2xl overflow-hidden shadow-lg border border-border/50 w-80 sm:w-96"
             >
               <video
                 autoPlay
@@ -211,6 +211,16 @@ const Hero = () => {
                 <source src="/videos/video-7.MOV" type="video/mp4" />
               </video>
             </motion.div>
+
+            {/* Short Description */}
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mb-8 text-sm sm:text-base text-muted-foreground max-w-sm leading-relaxed"
+            >
+              Empowering Ethiopian youth with career skills and leadership training. <span className="font-semibold text-foreground">5,000 Birr</span> per participant.
+            </motion.p>
 
             {/* CTAs */}
             <motion.div initial={{
