@@ -22,7 +22,7 @@ interface MediaItem {
   size: "small" | "medium" | "large" | "tall";
 }
 
-// Optimized Video component with lazy loading
+// Optimized Video component with lazy loading and thumbnail
 const LazyVideo = ({ 
   item, 
   isPlaying, 
@@ -35,8 +35,10 @@ const LazyVideo = ({
   videoRef: (el: HTMLVideoElement | null) => void;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [thumbnail, setThumbnail] = useState<string | null>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const internalVideoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +48,7 @@ const LazyVideo = ({
           observer.disconnect();
         }
       },
-      { rootMargin: "100px" }
+      { rootMargin: "200px" }
     );
 
     if (containerRef.current) {
@@ -56,24 +58,61 @@ const LazyVideo = ({
     return () => observer.disconnect();
   }, []);
 
+  // Capture first frame as thumbnail
+  const captureFirstFrame = useCallback((video: HTMLVideoElement) => {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+        setThumbnail(dataUrl);
+      }
+    } catch (e) {
+      // Silently fail if canvas capture doesn't work
+    }
+  }, []);
+
+  const handleLoadedData = useCallback((e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    setIsVideoReady(true);
+    
+    // Capture thumbnail from first frame
+    if (!thumbnail && video.readyState >= 2) {
+      captureFirstFrame(video);
+    }
+  }, [thumbnail, captureFirstFrame]);
+
+  const handleSetRef = useCallback((el: HTMLVideoElement | null) => {
+    internalVideoRef.current = el;
+    videoRef(el);
+  }, [videoRef]);
+
   return (
     <div ref={containerRef} className="relative" onClick={onTogglePlay}>
-      {/* Placeholder skeleton */}
-      {!isLoaded && (
-        <div className="aspect-[9/16] w-full bg-muted animate-pulse rounded-xl" />
+      {/* Thumbnail or placeholder */}
+      {!isVideoReady && (
+        <div className="aspect-[9/16] w-full rounded-xl overflow-hidden">
+          {thumbnail ? (
+            <img src={thumbnail} alt="" className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-muted to-muted-foreground/20 animate-pulse" />
+          )}
+        </div>
       )}
       
       {isVisible && (
         <video
-          ref={videoRef}
+          ref={handleSetRef}
           src={item.src}
           muted
           loop
           playsInline
-          preload="none"
-          poster=""
-          onLoadedData={() => setIsLoaded(true)}
-          className={`w-full h-auto object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+          preload="metadata"
+          onLoadedData={handleLoadedData}
+          className={`w-full h-auto object-cover transition-opacity duration-300 ${isVideoReady ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
         />
       )}
       
