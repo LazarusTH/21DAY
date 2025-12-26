@@ -90,7 +90,7 @@ const Hero = () => {
         y: 0
       }} transition={{
         duration: 0.6
-      }} className="mb-10 lg:mb-14 flex items-center justify-between">
+      }} className="mb-16 lg:mb-20 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground text-lg font-bold text-background font-display shadow-md">
               21

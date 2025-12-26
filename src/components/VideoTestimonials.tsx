@@ -27,7 +27,7 @@ const VideoTestimonials = () => {
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <AnimatedSection className="mb-14 text-center">
-          
+          <span className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase">Testimonials</span>
           <h2 className="font-display text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl mb-4">
             Real Stories,{" "}
             <span className="text-secondary">Real Transformation</span>
