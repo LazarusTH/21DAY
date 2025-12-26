@@ -1,29 +1,23 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { Briefcase, Heart, Target, Users, ArrowRight, Zap } from "lucide-react";
-
 const DualImpact = () => {
-  const pillars = [
-    {
-      icon: Briefcase,
-      title: "Professional Skills",
-      description: "Develop soft skills, professional etiquette, digital presence, and emotional intelligence for career success.",
-      gradient: "from-primary/20 via-primary/10 to-transparent",
-      iconBg: "bg-primary/15 text-primary border-primary/20",
-      number: "01",
-    },
-    {
-      icon: Heart,
-      title: "Community Service",
-      description: "Mandatory volunteer projects that create real impact while building leadership and teamwork skills.",
-      gradient: "from-secondary/20 via-secondary/10 to-transparent",
-      iconBg: "bg-secondary/15 text-secondary border-secondary/20",
-      number: "02",
-    },
-  ];
-
-  return (
-    <section className="relative overflow-hidden bg-background py-16 lg:py-20">
+  const pillars = [{
+    icon: Briefcase,
+    title: "Professional Skills",
+    description: "Develop soft skills, professional etiquette, digital presence, and emotional intelligence for career success.",
+    gradient: "from-primary/20 via-primary/10 to-transparent",
+    iconBg: "bg-primary/15 text-primary border-primary/20",
+    number: "01"
+  }, {
+    icon: Heart,
+    title: "Community Service",
+    description: "Mandatory volunteer projects that create real impact while building leadership and teamwork skills.",
+    gradient: "from-secondary/20 via-secondary/10 to-transparent",
+    iconBg: "bg-secondary/15 text-secondary border-secondary/20",
+    number: "02"
+  }];
+  return <section className="relative overflow-hidden bg-background py-16 lg:py-20">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute left-1/4 top-20 h-72 w-72 rounded-full bg-primary/5 blur-[100px]" />
@@ -37,15 +31,7 @@ const DualImpact = () => {
         {/* Header */}
         <AnimatedSection className="mb-16 lg:mb-20">
           <div className="flex flex-col items-center text-center">
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-              className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary to-primary shadow-lg"
-            >
-              <Zap className="h-8 w-8 text-white" />
-            </motion.div>
+            
             <span className="mb-4 inline-block rounded-full bg-muted px-4 py-1.5 text-sm font-semibold text-muted-foreground">
               Dual-Impact Model
             </span>
@@ -53,14 +39,18 @@ const DualImpact = () => {
               Transform Yourself,{" "}
               <span className="relative">
                 <span className="relative z-10 text-secondary">Transform Your Community</span>
-                <motion.span 
-                  className="absolute -bottom-2 left-0 h-3 w-full bg-secondary/20 -z-0"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                  style={{ originX: 0 }}
-                />
+                <motion.span className="absolute -bottom-2 left-0 h-3 w-full bg-secondary/20 -z-0" initial={{
+                scaleX: 0
+              }} whileInView={{
+                scaleX: 1
+              }} viewport={{
+                once: true
+              }} transition={{
+                delay: 0.5,
+                duration: 0.6
+              }} style={{
+                originX: 0
+              }} />
               </span>
             </h2>
           </div>
@@ -69,13 +59,17 @@ const DualImpact = () => {
         {/* Main Content - Bento Style */}
         <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
           {/* Left Pillar Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="group relative lg:col-span-5"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 40
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }} className="group relative lg:col-span-5">
             <div className="relative h-full overflow-hidden rounded-3xl border border-border/80 bg-card p-8 lg:p-10">
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${pillars[0].gradient} opacity-50`} />
@@ -98,11 +92,9 @@ const DualImpact = () => {
                 
                 {/* Skills tags */}
                 <div className="mt-6 flex flex-wrap gap-2">
-                  {["Soft Skills", "Digital Presence", "Etiquette"].map((skill) => (
-                    <span key={skill} className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                  {["Soft Skills", "Digital Presence", "Etiquette"].map(skill => <span key={skill} className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                       {skill}
-                    </span>
-                  ))}
+                    </span>)}
                 </div>
               </div>
               
@@ -112,21 +104,28 @@ const DualImpact = () => {
           </motion.div>
 
           {/* Center - Connection Visual */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden lg:flex lg:col-span-2 items-center justify-center"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          scale: 0.8
+        }} whileInView={{
+          opacity: 1,
+          scale: 1
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6,
+          delay: 0.2
+        }} className="hidden lg:flex lg:col-span-2 items-center justify-center">
             <div className="relative flex flex-col items-center gap-4">
               {/* Animated connection line */}
               <div className="h-20 w-0.5 bg-gradient-to-b from-primary via-secondary to-primary rounded-full overflow-hidden">
-                <motion.div
-                  className="h-8 w-full bg-white/50"
-                  animate={{ y: ["-100%", "300%"] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                />
+                <motion.div className="h-8 w-full bg-white/50" animate={{
+                y: ["-100%", "300%"]
+              }} transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear"
+              }} />
               </div>
               
               {/* Center icon */}
@@ -135,23 +134,31 @@ const DualImpact = () => {
               </div>
               
               <div className="h-20 w-0.5 bg-gradient-to-b from-secondary via-primary to-secondary rounded-full overflow-hidden">
-                <motion.div
-                  className="h-8 w-full bg-white/50"
-                  animate={{ y: ["-100%", "300%"] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 1 }}
-                />
+                <motion.div className="h-8 w-full bg-white/50" animate={{
+                y: ["-100%", "300%"]
+              }} transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 1
+              }} />
               </div>
             </div>
           </motion.div>
 
           {/* Right Pillar Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="group relative lg:col-span-5"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 40
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6,
+          delay: 0.3
+        }} className="group relative lg:col-span-5">
             <div className="relative h-full overflow-hidden rounded-3xl border border-border/80 bg-card p-8 lg:p-10">
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${pillars[1].gradient} opacity-50`} />
@@ -174,11 +181,9 @@ const DualImpact = () => {
                 
                 {/* Skills tags */}
                 <div className="mt-6 flex flex-wrap gap-2">
-                  {["Volunteering", "Leadership", "Teamwork"].map((skill) => (
-                    <span key={skill} className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary">
+                  {["Volunteering", "Leadership", "Teamwork"].map(skill => <span key={skill} className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary">
                       {skill}
-                    </span>
-                  ))}
+                    </span>)}
                 </div>
               </div>
               
@@ -189,13 +194,18 @@ const DualImpact = () => {
         </div>
 
         {/* Outcomes Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 lg:mt-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.6,
+        delay: 0.4
+      }} className="mt-12 lg:mt-16">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
             <div className="flex items-center gap-3 rounded-2xl bg-card border border-border/80 px-6 py-4 shadow-sm">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
@@ -215,8 +225,6 @@ const DualImpact = () => {
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default DualImpact;
