@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 import { HiPlay, HiPause } from "react-icons/hi";
 
 // Import images
@@ -22,7 +22,7 @@ interface MediaItem {
   size: "small" | "medium" | "large" | "tall";
 }
 
-// Optimized Video component with lazy loading and thumbnail
+// Ultra-lightweight Video component - only loads on click
 const LazyVideo = ({ 
   item, 
   isPlaying, 
@@ -34,107 +34,61 @@ const LazyVideo = ({
   onTogglePlay: () => void;
   videoRef: (el: HTMLVideoElement | null) => void;
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [thumbnail, setThumbnail] = useState<string | null>(null);
-  const [isVideoReady, setIsVideoReady] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const internalVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+  const handleClick = useCallback(() => {
+    if (!shouldLoad) {
+      setShouldLoad(true);
     }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Capture first frame as thumbnail
-  const captureFirstFrame = useCallback((video: HTMLVideoElement) => {
-    try {
-      const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-        setThumbnail(dataUrl);
-      }
-    } catch (e) {
-      // Silently fail if canvas capture doesn't work
-    }
-  }, []);
-
-  const handleLoadedData = useCallback((e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget;
-    setIsVideoReady(true);
-    
-    // Capture thumbnail from first frame
-    if (!thumbnail && video.readyState >= 2) {
-      captureFirstFrame(video);
-    }
-  }, [thumbnail, captureFirstFrame]);
-
-  const handleSetRef = useCallback((el: HTMLVideoElement | null) => {
-    internalVideoRef.current = el;
-    videoRef(el);
-  }, [videoRef]);
+    onTogglePlay();
+  }, [shouldLoad, onTogglePlay]);
 
   return (
-    <div ref={containerRef} className="relative" onClick={onTogglePlay}>
-      {/* Thumbnail or placeholder */}
-      {!isVideoReady && (
-        <div className="aspect-[9/16] w-full rounded-xl overflow-hidden">
-          {thumbnail ? (
-            <img src={thumbnail} alt="" className="w-full h-full object-cover" />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-muted to-muted-foreground/20 animate-pulse" />
-          )}
+    <div className="relative cursor-pointer" onClick={handleClick}>
+      {/* Static placeholder - no video loading until click */}
+      {!isLoaded && (
+        <div className="aspect-[9/16] w-full rounded-xl overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted-foreground/10 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center">
+            <HiPlay className="w-8 h-8 text-secondary" />
+          </div>
         </div>
       )}
       
-      {isVisible && (
+      {shouldLoad && (
         <video
-          ref={handleSetRef}
+          ref={videoRef}
           src={item.src}
           muted
           loop
           playsInline
-          preload="metadata"
-          onLoadedData={handleLoadedData}
-          className={`w-full h-auto object-cover transition-opacity duration-300 ${isVideoReady ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+          preload="none"
+          onCanPlay={() => setIsLoaded(true)}
+          className={`w-full h-auto object-cover rounded-xl transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
         />
       )}
       
       {/* Play/Pause Overlay */}
-      <div
-        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-          isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
-        }`}
-      >
-        <div className="absolute inset-0 bg-foreground/20" />
-        <motion.div
-          className="relative z-10 w-12 h-12 rounded-full bg-secondary/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+      {isLoaded && (
+        <div
+          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+            isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+          }`}
         >
-          {isPlaying ? (
-            <HiPause className="w-5 h-5 text-secondary-foreground" />
-          ) : (
-            <HiPlay className="w-5 h-5 text-secondary-foreground ml-0.5" />
-          )}
-        </motion.div>
-      </div>
+          <div className="absolute inset-0 bg-foreground/20 rounded-xl" />
+          <motion.div
+            className="relative z-10 w-12 h-12 rounded-full bg-secondary/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {isPlaying ? (
+              <HiPause className="w-5 h-5 text-secondary-foreground" />
+            ) : (
+              <HiPlay className="w-5 h-5 text-secondary-foreground ml-0.5" />
+            )}
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
