@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, Users, Calendar, Trophy, Sparkles, GraduationCap, Play } from "lucide-react";
+import { ArrowRight, Star, Users, Calendar, Trophy, Sparkles, GraduationCap } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -46,17 +46,6 @@ const Hero = () => {
           100% {
             background-position: 200% 0%;
           }
-        }
-        @keyframes pulse-glow {
-          0%, 100% {
-            box-shadow: 0 0 8px hsl(var(--secondary) / 0.6);
-          }
-          50% {
-            box-shadow: 0 0 16px hsl(var(--primary) / 0.8);
-          }
-        }
-        .glow-dot {
-          animation: pulse-glow 2s ease-in-out infinite;
         }
       `}</style>
 
@@ -194,10 +183,10 @@ const Hero = () => {
 
           {/* Right Column - Cards with Connection Lines */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="hidden lg:block relative"
+            className="relative lg:initial"
           >
             {/* Top Card - Program Overview */}
             <motion.div
@@ -235,44 +224,36 @@ const Hero = () => {
                   Community Service
                 </div>
               </div>
-              <div className="mt-5 flex gap-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 <span className="inline-flex items-center rounded-full bg-secondary/15 px-3 py-1.5 text-xs font-semibold text-secondary border border-secondary/20">Career Ready</span>
                 <span className="inline-flex items-center rounded-full bg-primary/15 px-3 py-1.5 text-xs font-semibold text-primary border border-primary/20">Leadership</span>
                 <span className="inline-flex items-center rounded-full bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground">+3</span>
               </div>
             </motion.div>
 
-            {/* Connection Lines Container */}
-            <div className="relative h-20 flex items-center justify-center">
+            {/* Connection Lines Container - Desktop only */}
+            <div className="hidden lg:block relative h-16">
               {/* Center vertical line */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-0 w-0.5 h-10 animated-line rounded-full" />
+              <div className="absolute left-1/2 -translate-x-1/2 top-0 w-0.5 h-8 animated-line rounded-full" />
               
-              {/* Glowing center dot */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-10 h-3 w-3 rounded-full bg-gradient-to-r from-secondary to-primary glow-dot" />
-              
-              {/* Left branch line */}
-              <div className="absolute top-10 left-1/2 -translate-x-1/2 flex items-center">
-                {/* Horizontal left */}
-                <div className="absolute right-1/2 w-[120px] h-0.5 animated-line-horizontal rounded-full" />
-                {/* Vertical down left */}
-                <div className="absolute right-[calc(50%+120px)] top-0 w-0.5 h-10 animated-line rounded-full" />
-                {/* Left end dot */}
-                <div className="absolute right-[calc(50%+118px)] top-10 h-2.5 w-2.5 rounded-full bg-emerald-500 glow-dot" />
+              {/* Left branch */}
+              <div className="absolute top-8 left-1/2 -translate-x-1/2">
+                <div className="absolute right-0 w-[110px] h-0.5 animated-line-horizontal rounded-full" />
+                <div className="absolute right-[110px] top-0 w-0.5 h-8 animated-line rounded-full" />
               </div>
               
-              {/* Right branch line */}
-              <div className="absolute top-10 left-1/2 -translate-x-1/2 flex items-center">
-                {/* Horizontal right */}
-                <div className="absolute left-1/2 w-[120px] h-0.5 animated-line-horizontal rounded-full" />
-                {/* Vertical down right */}
-                <div className="absolute left-[calc(50%+120px)] top-0 w-0.5 h-10 animated-line rounded-full" />
-                {/* Right end dot */}
-                <div className="absolute left-[calc(50%+118px)] top-10 h-2.5 w-2.5 rounded-full bg-violet-500 glow-dot" />
+              {/* Right branch */}
+              <div className="absolute top-8 left-1/2 -translate-x-1/2">
+                <div className="absolute left-0 w-[110px] h-0.5 animated-line-horizontal rounded-full" />
+                <div className="absolute left-[110px] top-0 w-0.5 h-8 animated-line rounded-full" />
               </div>
             </div>
 
+            {/* Mobile spacer */}
+            <div className="lg:hidden h-4" />
+
             {/* Bottom Cards - Outcomes */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <motion.div
                 className="relative z-10 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg hover:shadow-xl transition-shadow"
                 initial={{ opacity: 0, y: 20 }}
