@@ -43,9 +43,9 @@ const VideoTestimonials = () => {
           </h2>
         </AnimatedSection>
 
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="max-w-4xl mx-auto">
           {/* Video Section */}
-          <AnimatedSection direction="left" className="order-2 lg:order-1">
+          <AnimatedSection direction="scale">
             <div className="relative">
               {/* Video placeholder with play button */}
               <motion.div
@@ -120,38 +120,6 @@ const VideoTestimonials = () => {
               </motion.div>
             </div>
           </AnimatedSection>
-
-          {/* Testimonial Cards */}
-          <div className="order-1 space-y-6 lg:order-2">
-            {testimonials.map((testimonial, index) => (
-              <AnimatedSection
-                key={index}
-                delay={index * 0.15}
-                direction="right"
-              >
-                <motion.div
-                  className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:shadow-elevated"
-                  whileHover={{ x: 5 }}
-                >
-                  {/* Quote icon */}
-                  <Quote className="absolute -right-2 -top-2 h-16 w-16 rotate-180 text-secondary/10" />
-                  
-                  <p className="relative mb-4 text-muted-foreground italic leading-relaxed">
-                    "{testimonial.quote}"
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-warm text-sm font-semibold text-secondary-foreground">
-                      {testimonial.name.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
         </div>
       </div>
     </section>
