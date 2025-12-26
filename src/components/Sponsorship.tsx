@@ -31,7 +31,7 @@ const Sponsorship = () => {
         {/* Header */}
         <AnimatedSection className="mb-16 text-center">
           
-          <h2 className="mx-auto max-w-3xl font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
             Invest in a Future{" "}
             <span className="relative inline-block">
               <span className="relative z-10 text-secondary">Leader</span>

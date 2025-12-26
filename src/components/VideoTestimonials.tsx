@@ -28,7 +28,7 @@ const VideoTestimonials = () => {
         {/* Header */}
         <AnimatedSection className="mb-14 text-center">
           
-          <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl mb-4">
             Real Stories,{" "}
             <span className="text-secondary">Real Transformation</span>
           </h2>
