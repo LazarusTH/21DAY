@@ -153,21 +153,6 @@ const PhotoGallery = () => {
           })}
           </AnimatePresence>
 
-          {/* View More Button */}
-          <motion.button className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 px-5 py-3 bg-background border border-border rounded-full text-sm font-medium text-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:border-secondary z-40" initial={{
-          opacity: 0,
-          x: 20
-        }} whileInView={{
-          opacity: 1,
-          x: 0
-        }} viewport={{
-          once: true
-        }} whileHover={{
-          scale: 1.05
-        }}>
-            View More
-            <HiArrowRight className="w-4 h-4" />
-          </motion.button>
         </div>
 
         {/* Navigation Arrows */}
