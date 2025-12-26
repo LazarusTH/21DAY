@@ -107,9 +107,6 @@ const Hero = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="hidden sm:inline-flex text-muted-foreground">
-              Contact
-            </Button>
             <Button size="sm" className="hidden sm:inline-flex bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 shadow-md">
               Sponsor Now
             </Button>
@@ -171,10 +168,7 @@ const Hero = () => {
                     </motion.a>
                   ))}
                   
-                  <div className="pt-4 space-y-3">
-                    <Button variant="outline" className="w-full rounded-xl">
-                      Contact
-                    </Button>
+                  <div className="pt-4">
                     <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl">
                       Sponsor Now
                     </Button>
