@@ -75,10 +75,11 @@ const PhotoGallery = () => {
             Gallery
           </motion.span>
           <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
-            My Visual Diary
+            Moments of{" "}
+            <span className="text-secondary">Transformation</span>
           </h2>
           <p className="max-w-md mx-auto text-muted-foreground">
-            See the world through my lens, experiences in photos and videos.
+            Capturing the journey of growth, learning, and community impact through our programs.
           </p>
         </AnimatedSection>
 
