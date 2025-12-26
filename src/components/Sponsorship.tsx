@@ -33,21 +33,7 @@ const Sponsorship = () => {
           
           <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
             Invest in a Future{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10 text-secondary">Leader</span>
-              <motion.span className="absolute -bottom-1 left-0 h-3 w-full bg-secondary/20" initial={{
-              scaleX: 0
-            }} whileInView={{
-              scaleX: 1
-            }} viewport={{
-              once: true
-            }} transition={{
-              delay: 0.4,
-              duration: 0.5
-            }} style={{
-              originX: 0
-            }} />
-            </span>
+            <span className="text-secondary">Leader</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             Your sponsorship directly transforms a young person's future while building stronger communities.

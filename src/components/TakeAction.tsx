@@ -27,7 +27,7 @@ const TakeAction = () => {
           </motion.span>
           <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
             Take{" "}
-            <span className="inline-block bg-gradient-to-r from-secondary to-primary text-white px-3 py-1 rounded-xl">Action</span>
+            <span className="text-secondary">Action</span>
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground text-lg">
             Whether you're a young professional ready to transform your career or an organization looking to invest in the next generation — there's a place for you.

@@ -32,26 +32,12 @@ const DualImpact = () => {
         <AnimatedSection className="mb-16 lg:mb-20">
           <div className="flex flex-col items-center text-center">
             
-            <span className="mb-4 inline-block rounded-full bg-muted px-4 py-1.5 text-sm font-semibold text-muted-foreground">
+            <span className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase">
               Dual-Impact Model
             </span>
             <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
               Transform Yourself,{" "}
-              <span className="relative">
-                <span className="relative z-10 text-secondary">Transform Your Community</span>
-                <motion.span className="absolute -bottom-2 left-0 h-3 w-full bg-secondary/20 -z-0" initial={{
-                scaleX: 0
-              }} whileInView={{
-                scaleX: 1
-              }} viewport={{
-                once: true
-              }} transition={{
-                delay: 0.5,
-                duration: 0.6
-              }} style={{
-                originX: 0
-              }} />
-              </span>
+              <span className="text-secondary">Transform Your Community</span>
             </h2>
           </div>
         </AnimatedSection>
