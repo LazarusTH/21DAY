@@ -6,10 +6,12 @@ import PhotoGallery from "@/components/PhotoGallery";
 import Sponsorship from "@/components/Sponsorship";
 import TakeAction from "@/components/TakeAction";
 import CallToAction from "@/components/CallToAction";
+import StickyNav from "@/components/StickyNav";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
+      <StickyNav />
       <Hero />
       <DualImpact />
       <ProgramHighlights />
