@@ -4,12 +4,16 @@ import { useState } from "react";
 import { HiChevronLeft, HiChevronRight, HiArrowRight } from "react-icons/hi";
 
 // Import images
-import trainingEvent1 from "@/assets/training-event-1.jpg";
-import trainingEvent2 from "@/assets/training-event-2.jpg";
-import volunteerService from "@/assets/volunteer-service.jpg";
-import networkingEvent from "@/assets/networking-event.jpg";
-import leadershipSeminar from "@/assets/leadership-seminar.jpg";
-import teamBuilding from "@/assets/team-building.jpg";
+import gallery1 from "@/assets/gallery-1.jpg";
+import gallery2 from "@/assets/gallery-2.jpg";
+import gallery3 from "@/assets/gallery-3.jpg";
+import gallery4 from "@/assets/gallery-4.jpg";
+import gallery5 from "@/assets/gallery-5.jpg";
+import gallery6 from "@/assets/gallery-6.jpg";
+import gallery7 from "@/assets/gallery-7.jpg";
+import gallery8 from "@/assets/gallery-8.jpg";
+import gallery9 from "@/assets/gallery-9.jpg";
+import gallery10 from "@/assets/gallery-10.jpg";
 interface GalleryItem {
   id: number;
   src: string;
@@ -22,34 +26,54 @@ const PhotoGallery = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const galleryItems: GalleryItem[] = [{
     id: 1,
-    src: trainingEvent1,
-    title: "Graduation Ceremony",
+    src: gallery1,
+    title: "Team Discussion",
     category: "Training"
   }, {
     id: 2,
-    src: trainingEvent2,
-    title: "Workshop Session",
+    src: gallery2,
+    title: "Planning Session",
     category: "Training"
   }, {
     id: 3,
-    src: volunteerService,
-    title: "Community Service",
-    category: "Community"
+    src: gallery3,
+    title: "Workshop Meeting",
+    category: "Training"
   }, {
     id: 4,
-    src: networkingEvent,
-    title: "Networking Event",
+    src: gallery4,
+    title: "Career Talk",
     category: "Events"
   }, {
     id: 5,
-    src: leadershipSeminar,
-    title: "Leadership Seminar",
-    category: "Leadership"
+    src: gallery5,
+    title: "Stage Presentation",
+    category: "Events"
   }, {
     id: 6,
-    src: teamBuilding,
-    title: "Team Building",
+    src: gallery6,
+    title: "Expo Audience",
     category: "Events"
+  }, {
+    id: 7,
+    src: gallery7,
+    title: "Career Development",
+    category: "Events"
+  }, {
+    id: 8,
+    src: gallery8,
+    title: "Networking Session",
+    category: "Community"
+  }, {
+    id: 9,
+    src: gallery9,
+    title: "Team Photo",
+    category: "Leadership"
+  }, {
+    id: 10,
+    src: gallery10,
+    title: "Group Portrait",
+    category: "Leadership"
   }];
   const filteredItems = activeCategory === "All" ? galleryItems : galleryItems.filter(item => item.category === activeCategory);
   const goToNext = () => {
