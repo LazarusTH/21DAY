@@ -92,11 +92,9 @@ const Hero = () => {
         duration: 0.6
       }} className="mb-16 lg:mb-20 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground text-lg font-bold text-background font-display shadow-md">
-              21
-            </div>
+            <img src="/logo.jpg" alt="21 Day Bootcamp" className="h-10 w-auto rounded-lg shadow-md" />
             <span className="font-semibold text-foreground">
-              Day Bootcamp
+              21 Day Bootcamp
             </span>
           </div>
           
