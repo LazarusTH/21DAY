@@ -68,12 +68,13 @@ const ProgramHighlights = () => {
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-5"
-            animate={{ x: [0, -50 * highlights.length + "%"] }}
+            animate={{ x: ["0%", "-50%"] }}
             transition={{
               x: {
-                duration: 40,
+                duration: 80,
                 repeat: Infinity,
                 ease: "linear",
+                repeatType: "loop",
               },
             }}
             style={{ width: "fit-content" }}
