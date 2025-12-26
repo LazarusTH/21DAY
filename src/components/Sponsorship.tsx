@@ -17,7 +17,7 @@ const Sponsorship = () => {
     label: "Certification"
   }];
   const benefits = ["Full 21-day curriculum access", "Volunteer project participation", "Certificate upon completion", "Donor recognition benefits", "Impact report & updates"];
-  return <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+  return <section id="sponsor" className="relative overflow-hidden bg-background py-24 lg:py-32">
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px]" />

@@ -64,7 +64,7 @@ const PhotoGallery = () => {
       setSelectedItem(galleryItems[galleryItems.length - 1]);
     }
   };
-  return <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+  return <section id="gallery" className="relative overflow-hidden bg-background py-24 lg:py-32">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-secondary/5 blur-[120px]" />
