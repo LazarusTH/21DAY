@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { HiPlay, HiPause } from "react-icons/hi";
 
 // Import images
@@ -21,6 +21,105 @@ interface MediaItem {
   src: string;
   size: "small" | "medium" | "large" | "tall";
 }
+
+// Optimized Video component with lazy loading
+const LazyVideo = ({ 
+  item, 
+  isPlaying, 
+  onTogglePlay,
+  videoRef 
+}: { 
+  item: MediaItem; 
+  isPlaying: boolean; 
+  onTogglePlay: () => void;
+  videoRef: (el: HTMLVideoElement | null) => void;
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative" onClick={onTogglePlay}>
+      {/* Placeholder skeleton */}
+      {!isLoaded && (
+        <div className="aspect-[9/16] w-full bg-muted animate-pulse rounded-xl" />
+      )}
+      
+      {isVisible && (
+        <video
+          ref={videoRef}
+          src={item.src}
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster=""
+          onLoadedData={() => setIsLoaded(true)}
+          className={`w-full h-auto object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+        />
+      )}
+      
+      {/* Play/Pause Overlay */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+          isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+        }`}
+      >
+        <div className="absolute inset-0 bg-foreground/20" />
+        <motion.div
+          className="relative z-10 w-12 h-12 rounded-full bg-secondary/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {isPlaying ? (
+            <HiPause className="w-5 h-5 text-secondary-foreground" />
+          ) : (
+            <HiPlay className="w-5 h-5 text-secondary-foreground ml-0.5" />
+          )}
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+// Optimized Image component
+const LazyImage = ({ src, alt }: { src: string; alt: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="relative">
+      {!isLoaded && (
+        <div className="aspect-square w-full bg-muted animate-pulse" />
+      )}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setIsLoaded(true)}
+        className={`w-full h-auto object-cover transition-all duration-500 group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+      />
+    </div>
+  );
+};
 
 const PhotoGallery = () => {
   const [playingId, setPlayingId] = useState<number | null>(null);
@@ -53,7 +152,7 @@ const PhotoGallery = () => {
     { id: 19, type: "image", src: gallery10, size: "small" },
   ];
 
-  const togglePlay = (id: number) => {
+  const togglePlay = useCallback((id: number) => {
     const video = videoRefs.current[id];
     if (!video) return;
 
@@ -67,7 +166,7 @@ const PhotoGallery = () => {
       video.play();
       setPlayingId(id);
     }
-  };
+  }, [playingId]);
 
   return (
     <section id="gallery" className="relative overflow-hidden bg-background py-24 lg:py-32">
@@ -110,43 +209,14 @@ const PhotoGallery = () => {
               onClick={() => item.type === "video" && togglePlay(item.id)}
             >
               {item.type === "image" ? (
-                <img
-                  src={item.src}
-                  alt=""
-                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
+                <LazyImage src={item.src} alt="" />
               ) : (
-                <div className="relative">
-                  <video
-                    ref={(el) => (videoRefs.current[item.id] = el)}
-                    src={item.src}
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-auto object-cover"
-                  />
-                  
-                  {/* Play/Pause Overlay */}
-                  <div
-                    className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-                      playingId === item.id ? "opacity-0 group-hover:opacity-100" : "opacity-100"
-                    }`}
-                  >
-                    <div className="absolute inset-0 bg-foreground/20" />
-                    <motion.div
-                      className="relative z-10 w-12 h-12 rounded-full bg-secondary/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {playingId === item.id ? (
-                        <HiPause className="w-5 h-5 text-secondary-foreground" />
-                      ) : (
-                        <HiPlay className="w-5 h-5 text-secondary-foreground ml-0.5" />
-                      )}
-                    </motion.div>
-                  </div>
-                </div>
+                <LazyVideo
+                  item={item}
+                  isPlaying={playingId === item.id}
+                  onTogglePlay={() => togglePlay(item.id)}
+                  videoRef={(el) => (videoRefs.current[item.id] = el)}
+                />
               )}
 
               {/* Hover Glow Effect */}
