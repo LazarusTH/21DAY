@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { useState } from "react";
-import { X, ChevronLeft, ChevronRight, Expand } from "lucide-react";
+import { HiChevronLeft, HiChevronRight, HiArrowRight } from "react-icons/hi";
 
 // Import images
 import trainingEvent1 from "@/assets/training-event-1.jpg";
@@ -10,61 +10,53 @@ import volunteerService from "@/assets/volunteer-service.jpg";
 import networkingEvent from "@/assets/networking-event.jpg";
 import leadershipSeminar from "@/assets/leadership-seminar.jpg";
 import teamBuilding from "@/assets/team-building.jpg";
+
 interface GalleryItem {
   id: number;
   src: string;
   title: string;
-  span: string;
+  category: string;
 }
+
+const categories = ["All", "Training", "Events", "Community", "Leadership"];
+
 const PhotoGallery = () => {
-  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
-  const galleryItems: GalleryItem[] = [{
-    id: 1,
-    src: trainingEvent1,
-    title: "Graduation Ceremony",
-    span: "col-span-2 row-span-2"
-  }, {
-    id: 2,
-    src: trainingEvent2,
-    title: "Workshop Session",
-    span: "col-span-1 row-span-1"
-  }, {
-    id: 3,
-    src: volunteerService,
-    title: "Community Service",
-    span: "col-span-1 row-span-1"
-  }, {
-    id: 4,
-    src: networkingEvent,
-    title: "Networking Event",
-    span: "col-span-1 row-span-2"
-  }, {
-    id: 5,
-    src: leadershipSeminar,
-    title: "Leadership Seminar",
-    span: "col-span-1 row-span-1"
-  }, {
-    id: 6,
-    src: teamBuilding,
-    title: "Team Building",
-    span: "col-span-1 row-span-1"
-  }];
-  const currentIndex = selectedItem ? galleryItems.findIndex(item => item.id === selectedItem.id) : -1;
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const galleryItems: GalleryItem[] = [
+    { id: 1, src: trainingEvent1, title: "Graduation Ceremony", category: "Training" },
+    { id: 2, src: trainingEvent2, title: "Workshop Session", category: "Training" },
+    { id: 3, src: volunteerService, title: "Community Service", category: "Community" },
+    { id: 4, src: networkingEvent, title: "Networking Event", category: "Events" },
+    { id: 5, src: leadershipSeminar, title: "Leadership Seminar", category: "Leadership" },
+    { id: 6, src: teamBuilding, title: "Team Building", category: "Events" },
+  ];
+
+  const filteredItems = activeCategory === "All" 
+    ? galleryItems 
+    : galleryItems.filter(item => item.category === activeCategory);
+
   const goToNext = () => {
-    if (currentIndex < galleryItems.length - 1) {
-      setSelectedItem(galleryItems[currentIndex + 1]);
-    } else {
-      setSelectedItem(galleryItems[0]);
-    }
+    setCurrentIndex((prev) => (prev + 1) % filteredItems.length);
   };
+
   const goToPrev = () => {
-    if (currentIndex > 0) {
-      setSelectedItem(galleryItems[currentIndex - 1]);
-    } else {
-      setSelectedItem(galleryItems[galleryItems.length - 1]);
-    }
+    setCurrentIndex((prev) => (prev - 1 + filteredItems.length) % filteredItems.length);
   };
-  return <section id="gallery" className="relative overflow-hidden bg-background py-24 lg:py-32">
+
+  const getVisibleItems = () => {
+    const items = [];
+    const total = filteredItems.length;
+    for (let i = -2; i <= 2; i++) {
+      const index = (currentIndex + i + total) % total;
+      items.push({ ...filteredItems[index], position: i });
+    }
+    return items;
+  };
+
+  return (
+    <section id="gallery" className="relative overflow-hidden bg-background py-24 lg:py-32">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-secondary/5 blur-[120px]" />
@@ -73,146 +65,160 @@ const PhotoGallery = () => {
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <AnimatedSection className="mb-14">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <div>
-              <motion.span className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase" initial={{
-              opacity: 0,
-              x: -20
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} viewport={{
-              once: true
-            }}>
-                Gallery
-              </motion.span>
-              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-                Moments of{" "}
-                <span className="relative inline-block">
-                  <span className="relative z-10">Transformation</span>
-                  <motion.span className="absolute -bottom-1 left-0 h-3 w-full bg-secondary/20" initial={{
-                  scaleX: 0
-                }} whileInView={{
-                  scaleX: 1
-                }} viewport={{
-                  once: true
-                }} transition={{
-                  delay: 0.3,
-                  duration: 0.5
-                }} style={{
-                  originX: 0
-                }} />
-                </span>
-              </h2>
-            </div>
-            <p className="max-w-md text-muted-foreground lg:text-right">
-              Capturing the journey of growth, learning, and community impact through our programs.
-            </p>
-          </div>
+        <AnimatedSection className="mb-12 text-center">
+          <motion.span 
+            className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase"
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Gallery
+          </motion.span>
+          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
+            My Visual Diary
+          </h2>
+          <p className="max-w-md mx-auto text-muted-foreground">
+            See the world through my lens, experiences in photos and videos.
+          </p>
         </AnimatedSection>
 
-        {/* Bento Grid Gallery */}
-        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[200px]" initial={{
-        opacity: 0,
-        y: 40
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.6
-      }}>
-          {galleryItems.map((item, index) => <motion.div key={item.id} className={`group relative cursor-pointer overflow-hidden rounded-2xl ${item.span}`} initial={{
-          opacity: 0,
-          scale: 0.9
-        }} whileInView={{
-          opacity: 1,
-          scale: 1
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: index * 0.1
-        }} onClick={() => setSelectedItem(item)}>
-              {/* Image */}
-              <img src={item.src} alt={item.title} className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110" />
-              
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100" />
-              
-              {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-between p-4 opacity-0 transition-all duration-500 group-hover:opacity-100">
-                {/* Expand icon */}
-                <div className="flex justify-end">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background/90 text-foreground shadow-lg backdrop-blur-sm transition-transform group-hover:scale-110">
-                    <Expand className="h-4 w-4" />
-                  </div>
-                </div>
-                
-                {/* Title */}
-                <div>
-                  <h3 className="font-display text-lg font-semibold text-background">
-                    {item.title}
-                  </h3>
-                </div>
-              </div>
-
-              {/* Border glow effect */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-secondary/0 transition-all duration-500 group-hover:border-secondary/50" />
-            </motion.div>)}
+        {/* Category Filters */}
+        <motion.div 
+          className="flex flex-wrap justify-center gap-2 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => {
+                setActiveCategory(category);
+                setCurrentIndex(0);
+              }}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeCategory === category
+                  ? "bg-foreground text-background shadow-lg"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
         </motion.div>
 
-        {/* Stats row */}
-        
+        {/* Carousel */}
+        <div className="relative h-[400px] md:h-[500px] flex items-center justify-center">
+          <AnimatePresence mode="popLayout">
+            {getVisibleItems().map((item) => {
+              const isCenter = item.position === 0;
+              const isAdjacent = Math.abs(item.position) === 1;
+              const isOuter = Math.abs(item.position) === 2;
+
+              return (
+                <motion.div
+                  key={`${item.id}-${item.position}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: isOuter ? 0.4 : isAdjacent ? 0.7 : 1,
+                    scale: isCenter ? 1 : isAdjacent ? 0.75 : 0.55,
+                    x: item.position * (isCenter ? 0 : isAdjacent ? 280 : 420),
+                    zIndex: isCenter ? 30 : isAdjacent ? 20 : 10,
+                    rotateY: item.position * -5,
+                  }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="absolute cursor-pointer"
+                  onClick={() => {
+                    if (item.position !== 0) {
+                      setCurrentIndex((currentIndex + item.position + filteredItems.length) % filteredItems.length);
+                    }
+                  }}
+                >
+                  <div 
+                    className={`relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 ${
+                      isCenter ? "w-[320px] h-[380px] md:w-[400px] md:h-[450px]" : "w-[240px] h-[280px] md:w-[300px] md:h-[340px]"
+                    }`}
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                    {isCenter && (
+                      <motion.div 
+                        className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/80 to-transparent p-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        <span className="text-xs uppercase tracking-wider text-secondary font-semibold">
+                          {item.category}
+                        </span>
+                        <h3 className="font-display text-xl font-semibold text-background mt-1">
+                          {item.title}
+                        </h3>
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+
+          {/* View More Button */}
+          <motion.button
+            className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2 px-5 py-3 bg-background border border-border rounded-full text-sm font-medium text-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:border-secondary z-40"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05 }}
+          >
+            View More
+            <HiArrowRight className="w-4 h-4" />
+          </motion.button>
+        </div>
+
+        {/* Navigation Arrows */}
+        <motion.div 
+          className="flex justify-center gap-4 mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <button
+            onClick={goToPrev}
+            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-border bg-background text-foreground transition-all duration-300 hover:border-secondary hover:text-secondary hover:scale-110"
+          >
+            <HiChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={goToNext}
+            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-border bg-background text-foreground transition-all duration-300 hover:border-secondary hover:text-secondary hover:scale-110"
+          >
+            <HiChevronRight className="w-5 h-5" />
+          </button>
+        </motion.div>
+
+        {/* Dots Indicator */}
+        <div className="flex justify-center gap-2 mt-6">
+          {filteredItems.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex 
+                  ? "bg-secondary w-6" 
+                  : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+              }`}
+            />
+          ))}
+        </div>
       </div>
-
-      {/* Lightbox */}
-      {selectedItem && <motion.div initial={{
-      opacity: 0
-    }} animate={{
-      opacity: 1
-    }} exit={{
-      opacity: 0
-    }} className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/95 backdrop-blur-sm p-4" onClick={() => setSelectedItem(null)}>
-          {/* Close button */}
-          <button className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-background/10 text-background transition-colors hover:bg-background/20" onClick={() => setSelectedItem(null)}>
-            <X className="h-5 w-5" />
-          </button>
-
-          {/* Navigation */}
-          <button className="absolute left-4 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-background/10 text-background transition-all hover:bg-background/20 hover:scale-110" onClick={e => {
-        e.stopPropagation();
-        goToPrev();
-      }}>
-            <ChevronLeft className="h-7 w-7" />
-          </button>
-          <button className="absolute right-4 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-background/10 text-background transition-all hover:bg-background/20 hover:scale-110" onClick={e => {
-        e.stopPropagation();
-        goToNext();
-      }}>
-            <ChevronRight className="h-7 w-7" />
-          </button>
-
-          {/* Image counter */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 rounded-full bg-background/10 px-4 py-2 text-sm text-background">
-            {currentIndex + 1} / {galleryItems.length}
-          </div>
-
-          {/* Image */}
-          <motion.div key={selectedItem.id} initial={{
-        scale: 0.9,
-        opacity: 0
-      }} animate={{
-        scale: 1,
-        opacity: 1
-      }} className="relative max-h-[85vh] max-w-5xl overflow-hidden rounded-3xl shadow-2xl" onClick={e => e.stopPropagation()}>
-            <img src={selectedItem.src} alt={selectedItem.title} className="max-h-[85vh] w-auto object-contain" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/90 to-transparent p-6">
-              <h3 className="font-display text-2xl font-semibold text-background">{selectedItem.title}</h3>
-            </div>
-          </motion.div>
-        </motion.div>}
-    </section>;
+    </section>
+  );
 };
+
 export default PhotoGallery;
