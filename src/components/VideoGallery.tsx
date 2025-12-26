@@ -1,45 +1,63 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
-import { useState } from "react";
-import { HiPlay, HiX } from "react-icons/hi";
+import { useState, useRef } from "react";
+import { HiPlay, HiPause, HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 
 interface VideoItem {
   id: number;
   src: string;
-  thumbnail: string;
   title: string;
 }
 
 const VideoGallery = () => {
-  const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
+  const [playingId, setPlayingId] = useState<number | null>(null);
+  const [mutedVideos, setMutedVideos] = useState<Set<number>>(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+  const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
 
-  // Placeholder videos - replace src with actual video files
   const videos: VideoItem[] = [
-    {
-      id: 1,
-      src: "",
-      thumbnail: "",
-      title: "Training Highlights"
-    },
-    {
-      id: 2,
-      src: "",
-      thumbnail: "",
-      title: "Career Development Session"
-    },
-    {
-      id: 3,
-      src: "",
-      thumbnail: "",
-      title: "Event Recap"
-    },
-    {
-      id: 4,
-      src: "",
-      thumbnail: "",
-      title: "Success Stories"
-    }
+    { id: 1, src: "/videos/video-1.MOV", title: "Training Session" },
+    { id: 2, src: "/videos/video-2.MOV", title: "Workshop Highlights" },
+    { id: 3, src: "/videos/video-3.MOV", title: "Career Talk" },
+    { id: 4, src: "/videos/video-4.MOV", title: "Team Activity" },
+    { id: 5, src: "/videos/video-5.MOV", title: "Event Moments" },
+    { id: 6, src: "/videos/video-6.MOV", title: "Success Stories" },
+    { id: 7, src: "/videos/video-7.MOV", title: "Networking" },
+    { id: 8, src: "/videos/video-8.MOV", title: "Graduation" },
+    { id: 9, src: "/videos/video-9.MOV", title: "Behind the Scenes" },
   ];
+
+  const togglePlay = (id: number) => {
+    const video = videoRefs.current[id];
+    if (!video) return;
+
+    if (playingId === id) {
+      video.pause();
+      setPlayingId(null);
+    } else {
+      // Pause any currently playing video
+      if (playingId !== null && videoRefs.current[playingId]) {
+        videoRefs.current[playingId]?.pause();
+      }
+      video.play();
+      setPlayingId(id);
+    }
+  };
+
+  const toggleMute = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRefs.current[id];
+    if (!video) return;
+
+    const newMuted = new Set(mutedVideos);
+    if (mutedVideos.has(id)) {
+      newMuted.delete(id);
+      video.muted = false;
+    } else {
+      newMuted.add(id);
+      video.muted = true;
+    }
+    setMutedVideos(newMuted);
+  };
 
   return (
     <section id="videos" className="relative overflow-hidden bg-muted/30 py-24 lg:py-32">
@@ -69,78 +87,80 @@ const VideoGallery = () => {
           </p>
         </AnimatedSection>
 
-        {/* Video Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Video Grid - Responsive with natural aspect ratios */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {videos.map((video, index) => (
             <motion.div
               key={video.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-foreground/5 cursor-pointer"
-              onClick={() => video.src && setActiveVideo(video)}
+              transition={{ delay: index * 0.05 }}
+              className="group relative overflow-hidden rounded-xl bg-foreground/5 cursor-pointer"
+              onClick={() => togglePlay(video.id)}
             >
-              {/* Thumbnail or Placeholder */}
-              {video.thumbnail ? (
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center">
-                  <span className="text-muted-foreground text-sm">Video Coming Soon</span>
-                </div>
-              )}
+              {/* Video Element */}
+              <video
+                ref={(el) => (videoRefs.current[video.id] = el)}
+                src={video.src}
+                muted={mutedVideos.has(video.id)}
+                loop
+                playsInline
+                className="w-full h-auto object-cover"
+                onEnded={() => setPlayingId(null)}
+              />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+              {/* Overlay - Hidden when playing */}
+              <div 
+                className={`absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent transition-opacity duration-300 ${
+                  playingId === video.id ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+                }`}
+              />
 
-              {/* Play Button */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* Play/Pause Button */}
+              <div 
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                  playingId === video.id ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+                }`}
+              >
                 <motion.div
-                  className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-secondary/90 flex items-center justify-center shadow-lg"
                   whileHover={{ scale: 1.1 }}
                 >
-                  <HiPlay className="w-8 h-8 text-secondary-foreground ml-1" />
+                  {playingId === video.id ? (
+                    <HiPause className="w-5 h-5 sm:w-6 sm:h-6 text-secondary-foreground" />
+                  ) : (
+                    <HiPlay className="w-5 h-5 sm:w-6 sm:h-6 text-secondary-foreground ml-0.5" />
+                  )}
                 </motion.div>
               </div>
 
+              {/* Mute Button */}
+              <button
+                onClick={(e) => toggleMute(video.id, e)}
+                className={`absolute top-2 right-2 w-8 h-8 rounded-full bg-background/80 flex items-center justify-center transition-opacity duration-300 hover:bg-background ${
+                  playingId === video.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                }`}
+              >
+                {mutedVideos.has(video.id) ? (
+                  <HiVolumeOff className="w-4 h-4 text-foreground" />
+                ) : (
+                  <HiVolumeUp className="w-4 h-4 text-foreground" />
+                )}
+              </button>
+
               {/* Title */}
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h3 className="text-background font-semibold text-lg">{video.title}</h3>
+              <div 
+                className={`absolute bottom-0 left-0 right-0 p-3 transition-opacity duration-300 ${
+                  playingId === video.id ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+                }`}
+              >
+                <h3 className="text-background font-medium text-sm">{video.title}</h3>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-
-      {/* Video Modal */}
-      {activeVideo && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/90 p-4"
-          onClick={() => setActiveVideo(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-background hover:text-secondary transition-colors"
-            onClick={() => setActiveVideo(null)}
-          >
-            <HiX className="w-8 h-8" />
-          </button>
-          <div className="relative w-full max-w-4xl aspect-video" onClick={(e) => e.stopPropagation()}>
-            <video
-              src={activeVideo.src}
-              controls
-              autoPlay
-              className="w-full h-full rounded-lg"
-            />
-          </div>
-        </motion.div>
-      )}
     </section>
   );
 };
