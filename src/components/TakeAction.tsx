@@ -2,10 +2,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { HiArrowRight, HiOutlineAcademicCap, HiOutlineSparkles, HiCheck } from "react-icons/hi";
 import AnimatedSection from "./AnimatedSection";
-
 const TakeAction = () => {
-  return (
-    <section id="take-action" className="relative overflow-hidden bg-background py-24 lg:py-32">
+  return <section id="take-action" className="relative overflow-hidden bg-background py-24 lg:py-32">
       {/* Subtle grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--muted)/0.2)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--muted)/0.2)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
       
@@ -16,12 +14,15 @@ const TakeAction = () => {
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <AnimatedSection className="mb-16 text-center">
-          <motion.span 
-            className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase"
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.span className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase" initial={{
+          opacity: 0,
+          y: -10
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }}>
             Get Involved
           </motion.span>
           <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl mb-4">
@@ -36,17 +37,19 @@ const TakeAction = () => {
         {/* Cards Grid */}
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           {/* Apply as Student Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative rounded-3xl bg-card border border-border p-8 shadow-lg hover:shadow-xl transition-all duration-300 group"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }} className="relative rounded-3xl bg-card border border-border p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
             <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
-                <HiOutlineAcademicCap className="h-7 w-7 text-primary" />
-              </div>
+              
               <h3 className="font-display text-2xl font-bold text-foreground">Apply as a Student</h3>
             </div>
             
@@ -55,32 +58,25 @@ const TakeAction = () => {
             </p>
 
             <ul className="space-y-3 mb-8">
-              {[
-                "21 days of intensive training",
-                "Expert mentorship & coaching",
-                "Certificate of completion",
-                "Alumni network access"
-              ].map((item, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 * index }}
-                  className="flex items-center gap-3 text-foreground/80"
-                >
+              {["21 days of intensive training", "Expert mentorship & coaching", "Certificate of completion", "Alumni network access"].map((item, index) => <motion.li key={index} initial={{
+              opacity: 0,
+              x: -10
+            }} whileInView={{
+              opacity: 1,
+              x: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              delay: 0.1 * index
+            }} className="flex items-center gap-3 text-foreground/80">
                   <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/15 text-primary">
                     <HiCheck className="h-3 w-3" />
                   </div>
                   {item}
-                </motion.li>
-              ))}
+                </motion.li>)}
             </ul>
 
-            <Button 
-              className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-full font-semibold shadow-md group-hover:shadow-lg transition-all"
-              asChild
-            >
+            <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-full font-semibold shadow-md group-hover:shadow-lg transition-all" asChild>
               <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">
                 <span className="flex items-center gap-2">
                   Apply Now
@@ -91,21 +87,24 @@ const TakeAction = () => {
           </motion.div>
 
           {/* Become a Sponsor Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="relative rounded-3xl bg-foreground text-background p-8 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6,
+          delay: 0.1
+        }} className="relative rounded-3xl bg-foreground text-background p-8 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden">
             {/* Background decoration */}
             <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-secondary/20 blur-[60px]" />
             
             <div className="relative">
               <div className="flex items-center gap-3 mb-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary/20 border border-secondary/30">
-                  <HiOutlineSparkles className="h-7 w-7 text-secondary" />
-                </div>
+                
                 <h3 className="font-display text-2xl font-bold">Become a Sponsor</h3>
               </div>
               
@@ -114,32 +113,25 @@ const TakeAction = () => {
               </p>
 
               <ul className="space-y-3 mb-8">
-                {[
-                  "Sponsor individual participants",
-                  "Corporate partnership opportunities",
-                  "Mentorship program involvement",
-                  "Brand visibility & recognition"
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 * index }}
-                    className="flex items-center gap-3 text-background/80"
-                  >
+                {["Sponsor individual participants", "Corporate partnership opportunities", "Mentorship program involvement", "Brand visibility & recognition"].map((item, index) => <motion.li key={index} initial={{
+                opacity: 0,
+                x: -10
+              }} whileInView={{
+                opacity: 1,
+                x: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                delay: 0.1 * index
+              }} className="flex items-center gap-3 text-background/80">
                     <div className="flex h-5 w-5 items-center justify-center rounded-full bg-secondary/30 text-secondary">
                       <HiCheck className="h-3 w-3" />
                     </div>
                     {item}
-                  </motion.li>
-                ))}
+                  </motion.li>)}
               </ul>
 
-              <Button 
-                className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full font-semibold shadow-md group-hover:shadow-lg transition-all"
-                asChild
-              >
+              <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full font-semibold shadow-md group-hover:shadow-lg transition-all" asChild>
                 <a href="https://forms.google.com/sponsor" target="_blank" rel="noopener noreferrer">
                   <span className="flex items-center gap-2">
                     Partner With Us
@@ -151,8 +143,6 @@ const TakeAction = () => {
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TakeAction;

@@ -27,18 +27,7 @@ const VideoTestimonials = () => {
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <AnimatedSection className="mb-14 text-center">
-          <motion.div initial={{
-          scale: 0
-        }} whileInView={{
-          scale: 1
-        }} viewport={{
-          once: true
-        }} transition={{
-          type: "spring",
-          stiffness: 200
-        }} className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary">
-            <Volume2 className="h-7 w-7 text-secondary-foreground" />
-          </motion.div>
+          
           <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-background sm:text-4xl lg:text-5xl">
             Real Stories,{" "}
             <span className="text-secondary">Real Transformation</span>

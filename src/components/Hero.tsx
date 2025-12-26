@@ -2,28 +2,33 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { HiArrowRight, HiOutlineCalendar, HiOutlineUsers, HiOutlineAcademicCap, HiOutlineSparkles, HiOutlineBadgeCheck, HiCheck, HiMenu, HiX } from "react-icons/hi";
-
 const Hero = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
     setMobileMenuOpen(false);
   };
-
-  const navLinks = [
-    { href: "program", label: "Program" },
-    { href: "testimonials", label: "Testimonials" },
-    { href: "gallery", label: "Gallery" },
-    { href: "sponsor", label: "Sponsor" },
-  ];
-
-  return (
-    <section className="relative min-h-screen overflow-hidden bg-background">
+  const navLinks = [{
+    href: "program",
+    label: "Program"
+  }, {
+    href: "testimonials",
+    label: "Testimonials"
+  }, {
+    href: "gallery",
+    label: "Gallery"
+  }, {
+    href: "sponsor",
+    label: "Sponsor"
+  }];
+  return <section className="relative min-h-screen overflow-hidden bg-background">
       {/* Animated gradient line styles */}
       <style>{`
         @keyframes flowGradient {
@@ -77,12 +82,15 @@ const Hero = () => {
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Navigation */}
-        <motion.nav
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-10 lg:mb-14 flex items-center justify-between"
-        >
+        <motion.nav initial={{
+        opacity: 0,
+        y: -20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.6
+      }} className="mb-10 lg:mb-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-foreground text-lg font-bold text-background font-display shadow-md">
               21
@@ -94,16 +102,9 @@ const Hero = () => {
           
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            {navLinks.map((link) => (
-              <a 
-                key={link.href}
-                href={`#${link.href}`} 
-                onClick={(e) => scrollToSection(e, link.href)}
-                className="hover:text-foreground transition-colors"
-              >
+            {navLinks.map(link => <a key={link.href} href={`#${link.href}`} onClick={e => scrollToSection(e, link.href)} className="hover:text-foreground transition-colors">
                 {link.label}
-              </a>
-            ))}
+              </a>)}
           </div>
 
           <div className="flex items-center gap-2">
@@ -112,10 +113,7 @@ const Hero = () => {
             </Button>
             
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden flex items-center justify-center h-10 w-10 rounded-xl bg-muted/60 border border-border/50 text-foreground"
-            >
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden flex items-center justify-center h-10 w-10 rounded-xl bg-muted/60 border border-border/50 text-foreground">
               {mobileMenuOpen ? <HiX className="h-5 w-5" /> : <HiMenu className="h-5 w-5" />}
             </button>
           </div>
@@ -123,50 +121,49 @@ const Hero = () => {
 
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
-          {mobileMenuOpen && (
-            <>
+          {mobileMenuOpen && <>
               {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 lg:hidden"
-                onClick={() => setMobileMenuOpen(false)}
-              />
+              <motion.div initial={{
+            opacity: 0
+          }} animate={{
+            opacity: 1
+          }} exit={{
+            opacity: 0
+          }} transition={{
+            duration: 0.2
+          }} className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 lg:hidden" onClick={() => setMobileMenuOpen(false)} />
               
               {/* Slide-in Menu */}
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed top-0 right-0 h-full w-72 bg-background border-l border-border shadow-elevated z-50 lg:hidden"
-              >
+              <motion.div initial={{
+            x: "100%"
+          }} animate={{
+            x: 0
+          }} exit={{
+            x: "100%"
+          }} transition={{
+            type: "spring",
+            damping: 25,
+            stiffness: 200
+          }} className="fixed top-0 right-0 h-full w-72 bg-background border-l border-border shadow-elevated z-50 lg:hidden">
                 <div className="flex items-center justify-between p-6 border-b border-border">
                   <span className="font-semibold text-foreground">Menu</span>
-                  <button
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center h-9 w-9 rounded-lg bg-muted/60 text-foreground"
-                  >
+                  <button onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center h-9 w-9 rounded-lg bg-muted/60 text-foreground">
                     <HiX className="h-5 w-5" />
                   </button>
                 </div>
                 
                 <div className="p-6 space-y-2">
-                  {navLinks.map((link, index) => (
-                    <motion.a
-                      key={link.href}
-                      href={`#${link.href}`}
-                      onClick={(e) => scrollToSection(e, link.href)}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="block px-4 py-3 rounded-xl text-foreground font-medium hover:bg-muted/60 transition-colors"
-                    >
+                  {navLinks.map((link, index) => <motion.a key={link.href} href={`#${link.href}`} onClick={e => scrollToSection(e, link.href)} initial={{
+                opacity: 0,
+                x: 20
+              }} animate={{
+                opacity: 1,
+                x: 0
+              }} transition={{
+                delay: index * 0.1
+              }} className="block px-4 py-3 rounded-xl text-foreground font-medium hover:bg-muted/60 transition-colors">
                       {link.label}
-                    </motion.a>
-                  ))}
+                    </motion.a>)}
                   
                   <div className="pt-4">
                     <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl">
@@ -175,8 +172,7 @@ const Hero = () => {
                   </div>
                 </div>
               </motion.div>
-            </>
-          )}
+            </>}
         </AnimatePresence>
 
         {/* Main Content */}
@@ -184,26 +180,34 @@ const Hero = () => {
           {/* Left Column - Text */}
           <div className="max-w-xl">
             {/* Trust Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-7 inline-flex items-center gap-2.5 rounded-full bg-muted/60 backdrop-blur-sm px-4 py-2 text-sm border border-border/50"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5,
+            delay: 0.1
+          }} className="mb-7 inline-flex items-center gap-2.5 rounded-full bg-muted/60 backdrop-blur-sm px-4 py-2 text-sm border border-border/50">
               <div className="flex items-center gap-1.5 bg-emerald-500 text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
                 <HiCheck className="h-3 w-3" />
                 Success
               </div>
-              <span className="text-foreground/70 font-medium">2 Cohorts Completed</span>
+              <span className="text-foreground/70 font-medium">Multiple Cohorts Completed</span>
             </motion.div>
 
             {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 font-display text-[2.75rem] sm:text-5xl xl:text-[3.5rem] font-bold leading-[1.1] tracking-tight text-foreground"
-            >
+            <motion.h1 initial={{
+            opacity: 0,
+            y: 30
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} className="mb-6 font-display text-[2.75rem] sm:text-5xl xl:text-[3.5rem] font-bold leading-[1.1] tracking-tight text-foreground">
               <span className="inline-block bg-gradient-to-r from-secondary to-primary text-white px-3 py-1 rounded-xl shadow-lg transform -rotate-1">Transform</span>
               <br />
               <span className="mt-2 inline-block">Youth Into Leaders</span>
@@ -218,23 +222,29 @@ const Hero = () => {
             </motion.h1>
 
             {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-8 text-base sm:text-[1.1rem] text-muted-foreground max-w-md leading-relaxed"
-            >
-              21-day intensive bootcamp empowering Ethiopian youth with career skills, 
-              leadership training, and community service — for just <span className="font-semibold text-foreground">5,000 Birr</span> per participant.
+            <motion.p initial={{
+            opacity: 0,
+            y: 30
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.3
+          }} className="mb-8 text-base sm:text-[1.1rem] text-muted-foreground max-w-md leading-relaxed">21-day intensive bootcamp empowering Ethiopian youth with career skills, leadership training, and community service for just 5,000 Birr per participant.<span className="font-semibold text-foreground">5,000 Birr</span> per participant.
             </motion.p>
 
             {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-3"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: 0.4
+          }} className="flex flex-wrap items-center gap-3">
               <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <span className="flex items-center gap-2">
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-background/20">
@@ -251,19 +261,26 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Cards with Connection Lines */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative lg:initial"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.3
+        }} className="relative lg:initial">
             {/* Top Card - Program Overview */}
-            <motion.div
-              className="relative z-10 w-full rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
+            <motion.div className="relative z-10 w-full rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg" initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.5
+          }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
                   <HiOutlineCalendar className="h-5 w-5 text-primary" />
@@ -323,12 +340,15 @@ const Hero = () => {
 
             {/* Bottom Cards - Outcomes */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <motion.div
-                className="relative z-10 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg hover:shadow-xl transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-              >
+              <motion.div className="relative z-10 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg hover:shadow-xl transition-shadow" initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.8
+            }}>
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-emerald-500/20">
                     <HiOutlineBadgeCheck className="h-4 w-4 text-emerald-600" />
@@ -341,12 +361,15 @@ const Hero = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                className="relative z-10 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg hover:shadow-xl transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-              >
+              <motion.div className="relative z-10 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/80 p-5 shadow-lg hover:shadow-xl transition-shadow" initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.9
+            }}>
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-violet-500/5 border border-violet-500/20">
                     <HiOutlineUsers className="h-4 w-4 text-violet-600" />
@@ -363,8 +386,6 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;

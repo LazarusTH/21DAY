@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Coffee, Laptop, Award, Heart, Sparkles, Check } from "lucide-react";
+import { ArrowRight, BookOpen, Coffee, Laptop, Award, Heart, Check } from "lucide-react";
 const Sponsorship = () => {
   const includes = [{
     icon: BookOpen,
@@ -30,18 +30,7 @@ const Sponsorship = () => {
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <AnimatedSection className="mb-16 text-center">
-          <motion.div initial={{
-          scale: 0
-        }} whileInView={{
-          scale: 1
-        }} viewport={{
-          once: true
-        }} transition={{
-          type: "spring",
-          stiffness: 200
-        }} className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary to-primary shadow-lg">
-            <Heart className="h-8 w-8 text-white" />
-          </motion.div>
+          
           <h2 className="mx-auto max-w-3xl font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Invest in a Future{" "}
             <span className="relative inline-block">
@@ -81,7 +70,7 @@ const Sponsorship = () => {
         }} className="lg:col-span-5">
             <div className="rounded-3xl border border-border/80 bg-card p-8 shadow-sm">
               <div className="mb-6 flex items-center gap-3">
-                <Sparkles className="h-5 w-5 text-secondary" />
+                
                 <span className="font-semibold text-foreground">What's Included</span>
               </div>
               
