@@ -118,14 +118,30 @@ const ProgramHighlights = () => {
                   <div className="text-xs text-muted-foreground">Intensive but achievable</div>
                 </div>
               </div>
-              <div className="hidden h-1.5 flex-1 mx-6 rounded-full bg-muted sm:block overflow-hidden">
+              <div className="hidden h-1.5 flex-1 mx-6 rounded-full bg-muted sm:block overflow-hidden relative">
+                {/* Background shimmer */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full" />
+                {/* Animated flowing gradient */}
                 <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                  animate={{ x: ["-100%", "200%"] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+                {/* Main progress bar */}
+                <motion.div
+                  className="h-full rounded-full bg-gradient-to-r from-primary to-secondary relative"
                   initial={{ width: "0%" }}
                   whileInView={{ width: "100%" }}
-                  transition={{ duration: 2, delay: 0.5 }}
+                  transition={{ duration: 2, delay: 0.3 }}
                   viewport={{ once: true }}
-                />
+                >
+                  {/* Shimmer on top */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                  />
+                </motion.div>
               </div>
               <div className="flex items-center gap-3">
                 <div>
