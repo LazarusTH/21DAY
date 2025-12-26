@@ -145,18 +145,18 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4"
+              className="flex flex-wrap items-center gap-3"
             >
-              <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-7 h-13 text-sm font-semibold shadow-xl hover:shadow-2xl transition-all hover:-translate-y-0.5">
-                <span className="flex items-center gap-2.5">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-background/20">
-                    <ArrowRight className="h-3.5 w-3.5" />
+              <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
+                <span className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-background/20">
+                    <ArrowRight className="h-3 w-3" />
                   </span>
                   Get Started
                 </span>
               </Button>
-              <Button variant="ghost" size="lg" className="text-muted-foreground hover:text-foreground h-13 text-sm font-medium group">
-                See How It Works
+              <Button variant="ghost" className="text-muted-foreground hover:text-foreground font-medium group">
+                Sponsor
                 <ArrowRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
