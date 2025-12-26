@@ -195,19 +195,19 @@ const Hero = () => {
               <span className="inline-block bg-gradient-to-r from-secondary to-primary text-white px-3 py-1 rounded-xl shadow-lg transform -rotate-1">Bootcamp</span>
             </motion.h1>
 
-            {/* Autoplaying Video - Small ratio */}
+            {/* Autoplaying Video - Small rectangle */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 relative rounded-2xl overflow-hidden shadow-lg border border-border/50 max-w-xs"
+              className="mb-6 relative rounded-xl overflow-hidden shadow-lg border border-border/50 w-48"
             >
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="w-full h-auto object-cover aspect-[9/16]"
+                className="w-full h-auto object-cover aspect-video"
               >
                 <source src="/videos/video-7.MOV" type="video/mp4" />
               </video>
