@@ -92,9 +92,9 @@ const Hero = () => {
         </motion.nav>
 
         {/* Main Content */}
-        <div className="grid items-start gap-12 lg:gap-10 lg:grid-cols-[1fr,500px] xl:grid-cols-[1fr,560px]">
+        <div className="grid items-center gap-12 lg:gap-10 lg:grid-cols-[1fr,500px] xl:grid-cols-[1fr,560px]">
           {/* Left Column - Text */}
-          <div className="max-w-xl pt-2 lg:pt-6">
+          <div className="max-w-xl">
             {/* Trust Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
