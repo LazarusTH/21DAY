@@ -160,25 +160,6 @@ const Hero = () => {
                 <ArrowRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
-
-            {/* Stats Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-12 flex gap-8 pt-8 border-t border-border/50"
-            >
-              {[
-                { value: "21", label: "Days" },
-                { value: "100+", label: "Graduates" },
-                { value: "95%", label: "Success Rate" },
-              ].map((stat, index) => (
-                <div key={index}>
-                  <div className="font-display text-2xl font-bold text-foreground">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
           </div>
 
           {/* Right Column - Cards with Connection Lines */}
