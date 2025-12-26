@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { useState } from "react";
-import { X, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Expand } from "lucide-react";
 
 // Import images
 import trainingEvent1 from "@/assets/training-event-1.jpg";
@@ -13,133 +13,155 @@ import teamBuilding from "@/assets/team-building.jpg";
 
 interface GalleryItem {
   id: number;
-  type: "image" | "video";
   src: string;
   title: string;
-  category: string;
+  span: string;
 }
 
 const PhotoGallery = () => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
-  const [filter, setFilter] = useState<string>("all");
 
   const galleryItems: GalleryItem[] = [
-    { id: 1, type: "image", src: trainingEvent1, title: "Graduation Ceremony", category: "events" },
-    { id: 2, type: "image", src: trainingEvent2, title: "Workshop Session", category: "training" },
-    { id: 3, type: "image", src: volunteerService, title: "Community Service", category: "volunteer" },
-    { id: 4, type: "video", src: networkingEvent, title: "Networking Event", category: "events" },
-    { id: 5, type: "image", src: leadershipSeminar, title: "Leadership Seminar", category: "training" },
-    { id: 6, type: "image", src: teamBuilding, title: "Team Building", category: "volunteer" },
+    { id: 1, src: trainingEvent1, title: "Graduation Ceremony", span: "col-span-2 row-span-2" },
+    { id: 2, src: trainingEvent2, title: "Workshop Session", span: "col-span-1 row-span-1" },
+    { id: 3, src: volunteerService, title: "Community Service", span: "col-span-1 row-span-1" },
+    { id: 4, src: networkingEvent, title: "Networking Event", span: "col-span-1 row-span-2" },
+    { id: 5, src: leadershipSeminar, title: "Leadership Seminar", span: "col-span-1 row-span-1" },
+    { id: 6, src: teamBuilding, title: "Team Building", span: "col-span-1 row-span-1" },
   ];
-
-  const categories = [
-    { id: "all", label: "All" },
-    { id: "training", label: "Training" },
-    { id: "events", label: "Events" },
-    { id: "volunteer", label: "Volunteer" },
-  ];
-
-  const filteredItems = filter === "all" 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === filter);
 
   const currentIndex = selectedItem 
-    ? filteredItems.findIndex(item => item.id === selectedItem.id) 
+    ? galleryItems.findIndex(item => item.id === selectedItem.id) 
     : -1;
 
   const goToNext = () => {
-    if (currentIndex < filteredItems.length - 1) {
-      setSelectedItem(filteredItems[currentIndex + 1]);
+    if (currentIndex < galleryItems.length - 1) {
+      setSelectedItem(galleryItems[currentIndex + 1]);
+    } else {
+      setSelectedItem(galleryItems[0]);
     }
   };
 
   const goToPrev = () => {
     if (currentIndex > 0) {
-      setSelectedItem(filteredItems[currentIndex - 1]);
+      setSelectedItem(galleryItems[currentIndex - 1]);
+    } else {
+      setSelectedItem(galleryItems[galleryItems.length - 1]);
     }
   };
 
   return (
-    <section className="relative overflow-hidden bg-card py-24">
-      <div className="container mx-auto px-6">
-        <AnimatedSection className="mb-12 text-center">
-          <span className="mb-4 inline-block rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary">
-            Gallery
-          </span>
-          <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            Moments of{" "}
-            <span className="text-gradient">Transformation</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-            Capturing the journey of growth, learning, and community impact.
-          </p>
-        </AnimatedSection>
+    <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+      {/* Background */}
+      <div className="absolute inset-0">
+        <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-secondary/5 blur-[120px]" />
+        <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px]" />
+      </div>
 
-        {/* Filter tabs */}
-        <AnimatedSection delay={0.1} className="mb-10 flex flex-wrap justify-center gap-3">
-          {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              onClick={() => setFilter(category.id)}
-              className={`rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
-                filter === category.id
-                  ? "bg-secondary text-secondary-foreground shadow-soft"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {category.label}
-            </motion.button>
-          ))}
-        </AnimatedSection>
-
-        {/* Gallery grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredItems.map((item, index) => (
-            <AnimatedSection
-              key={item.id}
-              delay={index * 0.1}
-              direction="scale"
-            >
-              <motion.div
-                className="group relative cursor-pointer overflow-hidden rounded-xl shadow-soft"
-                whileHover={{ scale: 1.02 }}
-                onClick={() => setSelectedItem(item)}
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <AnimatedSection className="mb-14">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div>
+              <motion.span 
+                className="mb-4 inline-block text-sm font-semibold text-secondary tracking-wider uppercase"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
               >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                Gallery
+              </motion.span>
+              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                Moments of{" "}
+                <span className="relative inline-block">
+                  <span className="relative z-10">Transformation</span>
+                  <motion.span 
+                    className="absolute -bottom-1 left-0 h-3 w-full bg-secondary/20"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    style={{ originX: 0 }}
                   />
+                </span>
+              </h2>
+            </div>
+            <p className="max-w-md text-muted-foreground lg:text-right">
+              Capturing the journey of growth, learning, and community impact through our programs.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        {/* Bento Grid Gallery */}
+        <motion.div 
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[200px]"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {galleryItems.map((item, index) => (
+            <motion.div
+              key={item.id}
+              className={`group relative cursor-pointer overflow-hidden rounded-2xl ${item.span}`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              onClick={() => setSelectedItem(item)}
+            >
+              {/* Image */}
+              <img
+                src={item.src}
+                alt={item.title}
+                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
+              />
+              
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100" />
+              
+              {/* Content */}
+              <div className="absolute inset-0 flex flex-col justify-between p-4 opacity-0 transition-all duration-500 group-hover:opacity-100">
+                {/* Expand icon */}
+                <div className="flex justify-end">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background/90 text-foreground shadow-lg backdrop-blur-sm transition-transform group-hover:scale-110">
+                    <Expand className="h-4 w-4" />
+                  </div>
                 </div>
                 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-primary-foreground">
-                    <h3 className="font-display text-lg font-semibold">{item.title}</h3>
-                    <p className="text-sm opacity-80 capitalize">{item.category}</p>
-                  </div>
+                {/* Title */}
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-background">
+                    {item.title}
+                  </h3>
                 </div>
+              </div>
 
-                {/* Video indicator */}
-                {item.type === "video" && (
-                  <div className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-secondary shadow-lg">
-                    <Play className="ml-0.5 h-4 w-4 text-secondary-foreground" fill="currentColor" />
-                  </div>
-                )}
-              </motion.div>
-            </AnimatedSection>
+              {/* Border glow effect */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-secondary/0 transition-all duration-500 group-hover:border-secondary/50" />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* View more hint */}
-        <AnimatedSection delay={0.5} className="mt-10 text-center">
-          <p className="text-muted-foreground">
-            More photos and videos from our training sessions and events
-          </p>
-        </AnimatedSection>
+        {/* Stats row */}
+        <motion.div
+          className="mt-12 flex flex-wrap justify-center gap-8 lg:gap-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          {[
+            { value: "200+", label: "Photos" },
+            { value: "50+", label: "Events" },
+            { value: "2", label: "Cohorts" },
+          ].map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="font-display text-3xl font-bold text-foreground">{stat.value}</div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Lightbox */}
@@ -148,65 +170,57 @@ const PhotoGallery = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-primary/90 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/95 backdrop-blur-sm p-4"
           onClick={() => setSelectedItem(null)}
         >
           {/* Close button */}
           <button
-            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground transition-colors hover:bg-primary-foreground/20"
+            className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-background/10 text-background transition-colors hover:bg-background/20"
             onClick={() => setSelectedItem(null)}
           >
             <X className="h-5 w-5" />
           </button>
 
           {/* Navigation */}
-          {currentIndex > 0 && (
-            <button
-              className="absolute left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground transition-colors hover:bg-primary-foreground/20"
-              onClick={(e) => {
-                e.stopPropagation();
-                goToPrev();
-              }}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-          )}
-          {currentIndex < filteredItems.length - 1 && (
-            <button
-              className="absolute right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground transition-colors hover:bg-primary-foreground/20"
-              onClick={(e) => {
-                e.stopPropagation();
-                goToNext();
-              }}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
-          )}
+          <button
+            className="absolute left-4 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-background/10 text-background transition-all hover:bg-background/20 hover:scale-110"
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrev();
+            }}
+          >
+            <ChevronLeft className="h-7 w-7" />
+          </button>
+          <button
+            className="absolute right-4 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-background/10 text-background transition-all hover:bg-background/20 hover:scale-110"
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
+          >
+            <ChevronRight className="h-7 w-7" />
+          </button>
 
-          {/* Image/Video */}
+          {/* Image counter */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 rounded-full bg-background/10 px-4 py-2 text-sm text-background">
+            {currentIndex + 1} / {galleryItems.length}
+          </div>
+
+          {/* Image */}
           <motion.div
+            key={selectedItem.id}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="relative max-h-[80vh] max-w-4xl overflow-hidden rounded-2xl"
+            className="relative max-h-[85vh] max-w-5xl overflow-hidden rounded-3xl shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {selectedItem.type === "video" ? (
-              <div className="flex aspect-video items-center justify-center bg-card">
-                <div className="text-center">
-                  <Play className="mx-auto mb-4 h-16 w-16 text-secondary" />
-                  <p className="text-foreground">Video: {selectedItem.title}</p>
-                  <p className="text-sm text-muted-foreground">Video player placeholder</p>
-                </div>
-              </div>
-            ) : (
-              <img
-                src={selectedItem.src}
-                alt={selectedItem.title}
-                className="max-h-[80vh] w-auto"
-              />
-            )}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-6 text-primary-foreground">
-              <h3 className="font-display text-xl font-semibold">{selectedItem.title}</h3>
+            <img
+              src={selectedItem.src}
+              alt={selectedItem.title}
+              className="max-h-[85vh] w-auto object-contain"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/90 to-transparent p-6">
+              <h3 className="font-display text-2xl font-semibold text-background">{selectedItem.title}</h3>
             </div>
           </motion.div>
         </motion.div>
