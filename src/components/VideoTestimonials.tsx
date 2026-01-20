@@ -155,24 +155,17 @@ const VideoTestimonials = () => {
                         </div>
                       </div>
                     </div>
-                  </div> : <div className="flex aspect-video items-center justify-center bg-foreground text-background">
-                    <div className="text-center">
-                      <motion.div initial={{
-                    scale: 0
-                  }} animate={{
-                    scale: 1
-                  }} className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary">
-                        <Play className="ml-1 h-8 w-8 text-secondary-foreground" fill="currentColor" />
-                      </motion.div>
-                      <p className="mb-2 text-xl font-semibold">Video Player</p>
-                      <p className="text-sm opacity-60">Your testimonial video will play here</p>
-                      <button className="mt-6 rounded-full bg-secondary px-6 py-2.5 text-sm font-semibold text-secondary-foreground transition-transform hover:scale-105" onClick={e => {
-                    e.stopPropagation();
-                    setIsPlaying(false);
-                  }}>
-                        Close Video
-                      </button>
-                    </div>
+                  </div> : <div className="aspect-video">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/YhRWHT_o0cc?autoplay=1"
+                      title="Trainee Testimonials"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="rounded-3xl"
+                    />
                   </div>}
               </motion.div>
             </div>
