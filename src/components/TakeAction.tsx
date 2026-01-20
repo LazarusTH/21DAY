@@ -77,7 +77,7 @@ const TakeAction = () => {
             </ul>
 
             <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-full font-semibold shadow-md group-hover:shadow-lg transition-all" asChild>
-              <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://forms.gle/fLmKU1jCMqLVWFZy7" target="_blank" rel="noopener noreferrer">
                 <span className="flex items-center gap-2">
                   Apply Now
                   <HiArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -132,7 +132,7 @@ const TakeAction = () => {
               </ul>
 
               <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full font-semibold shadow-md group-hover:shadow-lg transition-all" asChild>
-                <a href="https://forms.google.com/sponsor" target="_blank" rel="noopener noreferrer">
+                <a href="https://forms.gle/joSQRC6r6yMZ461n9" target="_blank" rel="noopener noreferrer">
                   <span className="flex items-center gap-2">
                     Partner With Us
                     <HiArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

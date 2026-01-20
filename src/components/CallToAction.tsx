@@ -52,25 +52,16 @@ const CallToAction = () => {
             
           </div>
 
-          {/* Contact cards - matching brand style */}
+          {/* Contact card */}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <motion.a href="mailto:contact@21daybootcamp.com" className="flex items-center gap-3 rounded-2xl border border-border bg-card/80 backdrop-blur-sm px-5 py-3 transition-all hover:border-secondary/50 hover:shadow-lg" whileHover={{
-            scale: 1.02,
-            y: -2
-          }}>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 border border-secondary/20">
-                <HiOutlineMail className="h-5 w-5 text-secondary" />
-              </div>
-              <span className="text-sm text-foreground">contact@21daybootcamp.com</span>
-            </motion.a>
-            <motion.a href="tel:+251911234567" className="flex items-center gap-3 rounded-2xl border border-border bg-card/80 backdrop-blur-sm px-5 py-3 transition-all hover:border-secondary/50 hover:shadow-lg" whileHover={{
+            <motion.a href="tel:+251912671410" className="flex items-center gap-3 rounded-2xl border border-border bg-card/80 backdrop-blur-sm px-5 py-3 transition-all hover:border-secondary/50 hover:shadow-lg" whileHover={{
             scale: 1.02,
             y: -2
           }}>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 border border-secondary/20">
                 <HiOutlinePhone className="h-5 w-5 text-secondary" />
               </div>
-              <span className="text-sm text-foreground">+251 91 123 4567</span>
+              <span className="text-sm text-foreground">+251 912 671 410</span>
             </motion.a>
           </div>
         </motion.div>
