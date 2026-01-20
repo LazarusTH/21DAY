@@ -106,8 +106,10 @@ const Hero = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <Button size="sm" className="hidden sm:inline-flex bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 shadow-md">
-              Sponsor Now
+            <Button size="sm" className="hidden sm:inline-flex bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 shadow-md" asChild>
+              <a href="https://forms.gle/joSQRC6r6yMZ461n9" target="_blank" rel="noopener noreferrer">
+                Sponsor Now
+              </a>
             </Button>
             
             {/* Mobile Menu Button */}
@@ -164,8 +166,10 @@ const Hero = () => {
                     </motion.a>)}
                   
                   <div className="pt-4">
-                    <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl">
-                      Sponsor Now
+                    <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl" asChild>
+                      <a href="https://forms.gle/joSQRC6r6yMZ461n9" target="_blank" rel="noopener noreferrer">
+                        Sponsor Now
+                      </a>
                     </Button>
                   </div>
                 </div>
@@ -231,17 +235,21 @@ const Hero = () => {
             duration: 0.6,
             delay: 0.4
           }} className="flex flex-wrap items-center gap-3">
-              <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
-                <span className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-background/20">
-                    <HiArrowRight className="h-3 w-3" />
+              <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5" asChild>
+                <a href="https://forms.gle/fLmKU1jCMqLVWFZy7" target="_blank" rel="noopener noreferrer">
+                  <span className="flex items-center gap-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-background/20">
+                      <HiArrowRight className="h-3 w-3" />
+                    </span>
+                    Get Started
                   </span>
-                  Get Started
-                </span>
+                </a>
               </Button>
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground font-medium group">
-                Sponsor
-                <HiArrowRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
+              <Button variant="ghost" className="text-muted-foreground hover:text-foreground font-medium group" asChild>
+                <a href="https://forms.gle/joSQRC6r6yMZ461n9" target="_blank" rel="noopener noreferrer">
+                  Sponsor
+                  <HiArrowRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
+                </a>
               </Button>
             </motion.div>
           </div>
