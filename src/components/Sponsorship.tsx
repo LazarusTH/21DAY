@@ -150,9 +150,11 @@ const Sponsorship = () => {
                         Sponsor one participant through the complete 21-day transformation journey.
                       </p>
                       
-                      <Button size="lg" className="mt-8 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
-                        Sponsor Now
-                        <ArrowRight className="h-5 w-5 ml-2" />
+                      <Button size="lg" className="mt-8 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5" asChild>
+                        <a href="https://forms.gle/joSQRC6r6yMZ461n9" target="_blank" rel="noopener noreferrer">
+                          Sponsor Now
+                          <ArrowRight className="h-5 w-5 ml-2" />
+                        </a>
                       </Button>
                     </div>
 
