@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { HiArrowRight, HiOutlineCalendar, HiOutlineUsers, HiOutlineAcademicCap, HiOutlineSparkles, HiOutlineBadgeCheck, HiCheck, HiMenu, HiX } from "react-icons/hi";
+import logo from "@/assets/logo.png";
 const Hero = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -92,7 +93,7 @@ const Hero = () => {
         duration: 0.6
       }} className="mb-16 lg:mb-20 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <img src="/logo.jpg" alt="21 Day Bootcamp" className="h-10 w-auto rounded-lg shadow-md" />
+            <img src={logo} alt="21 Day Bootcamp" className="h-10 w-auto" />
             <span className="font-semibold text-foreground">
               21 Day Bootcamp
             </span>
