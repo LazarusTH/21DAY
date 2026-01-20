@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import logo from "@/assets/logo.png";
 
 const StickyNav = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,7 +51,7 @@ const StickyNav = () => {
             <nav className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex items-center gap-2.5">
-                <img src="/logo.jpg" alt="21 Day Bootcamp" className="h-9 w-auto rounded-lg shadow-sm" />
+                <img src={logo} alt="21 Day Bootcamp" className="h-9 w-auto" />
                 <span className="font-semibold text-foreground text-sm">
                   21 Day Bootcamp
                 </span>
